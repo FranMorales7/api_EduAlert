@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class TeachersTableSeeder extends Seeder
 {
@@ -15,23 +14,71 @@ class TeachersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Crear una instancia de Faker para generar datos aleatorios
-        $faker = Faker::create();
-
-        // Crear 10 registros de ejemplo en la tabla teachers
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('teachers')->insert([
-                'name' => $faker->firstName,
-                'last_name_1' => $faker->lastName,
-                'last_name_2' => $faker->optional()->lastName,
-                'image' => $faker->imageUrl(200, 200, 'people'),
-                'e-mail' => $faker->unique()->safeEmail,
-                'password' => bcrypt('password123'), // Contraseña cifrada
-                'is_admin' => $faker->boolean, // Random boolean (true/false)
-                'is_active' => true, // Puedes cambiar esto si quieres asignar aleatoriamente
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        // Crea 5 registros de ejemplo en la tabla teachers
+        DB::table('teachers')->insert([
+            'name' => 'Julio',
+            'last_name_1' => 'Martínez',
+            'last_name_2' => 'Soria',
+            'image' => null,
+            'e-mail' => 'julioMSoria@email.com',
+            'password' => bcrypt('12345678'), // Contraseña cifrada
+            // Por defecto están a false
+            // 'is_admin' => false, 
+            // 'is_active' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('teachers')->insert([
+            'name' => 'Olga',
+            'last_name_1' => 'García',
+            'last_name_2' => 'Delgado',
+            'image' => null,
+            'e-mail' => 'olgaDelgado@email.com',
+            'password' => bcrypt('12345678'), // Contraseña cifrada
+            // Por defecto están a false
+            // 'is_admin' => false, 
+            // 'is_active' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('teachers')->insert([
+            'name' => 'Samuel',
+            'last_name_1' => 'Castillejo',
+            'last_name_2' => 'Sánchez',
+            'image' => null,
+            'e-mail' => 'samuCastillejo@email.com',
+            'password' => bcrypt('12345678'), // Contraseña cifrada
+            // Por defecto están a false
+            // 'is_admin' => false, 
+            // 'is_active' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('teachers')->insert([
+            'name' => 'Isabel',
+            'last_name_1' => 'Herrera',
+            'last_name_2' => 'Nuñez',
+            'image' => null,
+            'e-mail' => 'isabelHerrera@email.com',
+            'password' => bcrypt('12345678'), // Contraseña cifrada
+            // Por defecto están a false
+            // 'is_admin' => false, 
+            // 'is_active' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('teachers')->insert([
+            'name' => 'Pedro',
+            'last_name_1' => 'Quevedo',
+            'last_name_2' => 'Linton',
+            'image' => null,
+            'e-mail' => 'Quevedo@email.com',
+            'password' => bcrypt('12345678'), // Contraseña cifrada
+            // Por defecto están a false
+            // 'is_admin' => false, 
+            // 'is_active' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

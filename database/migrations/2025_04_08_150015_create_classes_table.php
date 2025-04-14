@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             // Si se borra un grupo, la clase se eliminará también
             $table->foreignId('group_id')->nullable()->constrained('groups')->onDelete('cascade');
+            // Hora de inicio y fin de la clase
+            $table->time('starts_at');
+            $table->time('ends_at');
+
             $table->timestamps();
         });
     }

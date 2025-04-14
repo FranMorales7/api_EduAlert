@@ -20,6 +20,8 @@ class ClassesTableSeeder extends Seeder
             'location' => 'Aula 199',
             'teacher_id' => 2, 
             'group_id' => 3,
+            'starts_at' => '09:00:00',
+            'ends_at' => '10:00:00',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -28,6 +30,8 @@ class ClassesTableSeeder extends Seeder
             'location' => 'Aula 75',
             'teacher_id' => 5, 
             'group_id' => 1,
+            'starts_at' => '13:30:00',
+            'ends_at' => '14:30:00',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -36,6 +40,8 @@ class ClassesTableSeeder extends Seeder
             'location' => 'Aula 301',
             'teacher_id' => 4, 
             'group_id' => 2,
+            'starts_at' => '11:30:00',
+            'ends_at' => '12:30:00',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

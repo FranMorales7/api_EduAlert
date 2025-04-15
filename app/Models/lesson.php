@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class classes extends Model
+class Lesson extends Model
 {
     use HasFactory;
 
@@ -14,4 +14,13 @@ class classes extends Model
 
     // Campos que no se mostrarán en los resultados
     protected $hidden = [];
+
+    // Indica relación Eloquent
+    public function teacher(){
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
 }

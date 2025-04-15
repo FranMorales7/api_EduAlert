@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ClassesTableSeeder extends Seeder
+class LessonsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class ClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        // Crear 3 registros de ejemplo en la tabla classes
-        DB::table('classes')->insert([
+        // Crear 3 registros de ejemplo en la tabla lessons
+        DB::table('lessons')->insert([
             'description' => 'Clase de Lengua castellana y literatura',
             'location' => 'Aula 199',
             'teacher_id' => 2, 
@@ -25,7 +25,7 @@ class ClassesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('classes')->insert([
+        DB::table('lessons')->insert([
             'description' => 'Clase de Geografía e historia',
             'location' => 'Aula 75',
             'teacher_id' => 5, 
@@ -35,7 +35,7 @@ class ClassesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('classes')->insert([
+        DB::table('lessons')->insert([
             'description' => 'Clase de Programación ',
             'location' => 'Aula 301',
             'teacher_id' => 4, 

@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             TutorsTableSeeder::class,
             GroupsTableSeeder::class,
             StudentsTableSeeder::class,
-            ClassesTableSeeder::class,
-            ExitsTableSeeder::class,
+            LessonsTableSeeder::class,
+            TripsTableSeeder::class,
             IncidentsTableSeeder::class
         ]);
     }

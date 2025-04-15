@@ -20,7 +20,7 @@ class IncidentsTableSeeder extends Seeder
             'is_solved' => true,
             'student_id' => 2, 
             'teacher_id' => 3,
-            'class_id' => 2,
+            'lesson_id' => 2,
             'created_at' => '2025-04-14 12:05:48',
             'updated_at' => '2025-04-16 12:10:08',
         ]);
@@ -29,7 +29,7 @@ class IncidentsTableSeeder extends Seeder
             'is_solved' => false,
             'student_id' => 8, 
             'teacher_id' => 1,
-            'class_id' => 3,
+            'lesson_id' => 3,
             'created_at' => '2025-05-12 10:15:01',
             'updated_at' => now(),
         ]);

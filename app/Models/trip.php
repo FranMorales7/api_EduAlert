@@ -24,7 +24,7 @@ class Trip extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function class(){
+    public function lesson(){
         return $this->belongsTo(Lesson::class);
     }
 }

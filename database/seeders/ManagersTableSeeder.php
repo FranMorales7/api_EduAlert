@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ManagementTeamsTableSeeder extends Seeder
+class ManagersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class ManagementTeamsTableSeeder extends Seeder
     public function run()
     {
         // Crea 5 registros de ejemplo en la tabla managementteams
-        DB::table('management_teams')->insert([
+        DB::table('managers')->insert([
             'name' => 'Rosario',
             'last_name_1' => 'Jiménez',
             'last_name_2' => 'Blanco',
@@ -28,7 +28,7 @@ class ManagementTeamsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('management_teams')->insert([
+        DB::table('managers')->insert([
             'name' => 'Gonzalo',
             'last_name_1' => 'Megías',
             'last_name_2' => 'Calvo',
@@ -41,7 +41,7 @@ class ManagementTeamsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('management_teams')->insert([
+        DB::table('managers')->insert([
             'name' => 'Dolores',
             'last_name_1' => 'Cifuentes',
             'last_name_2' => 'Rodríguez',
@@ -54,7 +54,7 @@ class ManagementTeamsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('management_teams')->insert([
+        DB::table('managers')->insert([
             'name' => 'Juan Pablo',
             'last_name_1' => 'Gómez',
             'last_name_2' => 'Neva',
@@ -67,7 +67,7 @@ class ManagementTeamsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        DB::table('management_teams')->insert([
+        DB::table('managers')->insert([
             'name' => 'Sonia',
             'last_name_1' => 'Reverte',
             'last_name_2' => 'Fortea',

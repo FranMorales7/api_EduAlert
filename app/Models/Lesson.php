@@ -23,4 +23,8 @@ class Lesson extends Model
     public function group(){
         return $this->belongsTo(Group::class);
     }
+
+     //Convertir los datos pasados al tipo necesario
+     protected $casts = ['starts_at' => 'datetime', 'ends_at' => 'datetime'];
+
 }

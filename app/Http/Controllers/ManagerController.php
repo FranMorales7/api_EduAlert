@@ -22,12 +22,12 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'last_name_1' => 'required|string|max:255',
             'last_name_2' => 'nullable|string|max:255',
             'image' => 'nullable|string|max:255',
-            'e-mail' => 'required|email|unique:managers',
+            'email' => 'required|email|unique:managers',
             'password' => 'required|min:8',
             'is_admin' => 'boolean',
             'is_active' => 'boolean',
@@ -54,12 +54,12 @@ class ManagerController extends Controller
      */
     public function update(Request $request, Manager $manager)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'last_name_1' => 'sometimes|string|max:255',
             'last_name_2' => 'sometimes|string|max:255',
             'image' => 'sometimes|string|max:255',
-            'e-mail' => 'sometimes|email|unique:managers,email,' . $manager->id,
+            'email' => 'sometimes|email|unique:managers,email,' . $manager->id,
             'password' => 'sometimes|min:8',
             'is_admin' => 'boolean',
             'is_active' => 'boolean',

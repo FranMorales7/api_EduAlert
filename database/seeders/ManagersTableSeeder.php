@@ -20,7 +20,7 @@ class ManagersTableSeeder extends Seeder
             'last_name_1' => 'Jiménez',
             'last_name_2' => 'Blanco',
             'image' => null,
-            'e-mail' => 'rosarioJBlanco@email.com',
+            'email' => 'rosarioJBlanco@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
             // Por defecto están a ...
             // 'is_admin' => true, 
@@ -33,7 +33,7 @@ class ManagersTableSeeder extends Seeder
             'last_name_1' => 'Megías',
             'last_name_2' => 'Calvo',
             'image' => null,
-            'e-mail' => 'gonzaloMegias@email.com',
+            'email' => 'gonzaloMegias@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
             // Por defecto están a ...
             // 'is_admin' => true, 
@@ -46,7 +46,7 @@ class ManagersTableSeeder extends Seeder
             'last_name_1' => 'Cifuentes',
             'last_name_2' => 'Rodríguez',
             'image' => null,
-            'e-mail' => 'doloresCifuentes@email.com',
+            'email' => 'doloresCifuentes@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
             // Por defecto están a ...
             // 'is_admin' => true, 
@@ -59,7 +59,7 @@ class ManagersTableSeeder extends Seeder
             'last_name_1' => 'Gómez',
             'last_name_2' => 'Neva',
             'image' => null,
-            'e-mail' => 'juanGomez@email.com',
+            'email' => 'juanGomez@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
             // Por defecto están a ...
             // 'is_admin' => true, 
@@ -72,7 +72,7 @@ class ManagersTableSeeder extends Seeder
             'last_name_1' => 'Reverte',
             'last_name_2' => 'Fortea',
             'image' => null,
-            'e-mail' => 'soniaReverte@email.com',
+            'email' => 'soniaReverte@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
             // Por defecto están a ...
             // 'is_admin' => true, 

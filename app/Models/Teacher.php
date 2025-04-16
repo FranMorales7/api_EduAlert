@@ -10,7 +10,7 @@ class Teacher extends Model
     use HasFactory;
 
     // Campos que se pueden asignar masivamente
-    protected $fillable = ['name', 'last_name_1', 'last_name_2', 'image', 'e-mail', 'password', 'is_admin', 'is_active'];
+    protected $fillable = ['name', 'last_name_1', 'last_name_2', 'image', 'email', 'password', 'is_admin', 'is_active'];
 
     // Campos que no se mostrarán en los resultados
     protected $hidden = ['password'];

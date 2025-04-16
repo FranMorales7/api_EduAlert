@@ -21,12 +21,12 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'last_name_1' => 'required|string|max:255',
             'last_name_2' => 'nullable|string|max:255',
             'image' => 'nullable|string|max:255',
-            'e-mail' => 'required|email|unique:teachers',
+            'email' => 'required|email|unique:teachers',
             'password' => 'required|min:8',
             'is_admin' => 'boolean',
             'is_active' => 'boolean',
@@ -53,12 +53,12 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'last_name_1' => 'sometimes|string|max:255',
             'last_name_2' => 'sometimes|string|max:255',
             'image' => 'sometimes|string|max:255',
-            'e-mail' => 'sometimes|email|unique:teachers,email,' . $teacher->id,
+            'email' => 'sometimes|email|unique:teachers,email,' . $teacher->id,
             'password' => 'sometimes|min:8',
             'is_admin' => 'boolean',
             'is_active' => 'boolean',

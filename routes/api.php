@@ -11,18 +11,18 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\TutorController;
 
-Route::apiResource('grupos', GroupController::class);
+Route::apiResource('groups', GroupController::class);
 
-Route::apiResource('incidentes', IncidentController::class);
+Route::apiResource('incidents', IncidentController::class);
 
-Route::apiResource('clases', LessonController::class);
+Route::apiResource('lessons', LessonController::class);
 
-Route::apiResource('equipo-directivo', ManagerController::class);
+Route::apiResource('managers', ManagerController::class);
 
-Route::apiResource('alumnado', StudentController::class);
+Route::apiResource('students', StudentController::class);
 
-Route::apiResource('profesorado', TeacherController::class);
+Route::apiResource('teachers', TeacherController::class);
 
-Route::apiResource('salidas', TripController::class);
+Route::apiResource('trips', TripController::class);
 
-Route::apiResource('tutores', TutorController::class);
+Route::apiResource('tutors', TutorController::class);

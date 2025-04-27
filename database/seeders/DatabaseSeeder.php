@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             StudentsTableSeeder::class,
             LessonsTableSeeder::class,
             TripsTableSeeder::class,
-            IncidentsTableSeeder::class
+            IncidentsTableSeeder::class,
+            UsersTableSeeder::class
         ]);
     }
 }

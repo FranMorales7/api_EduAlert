@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Crea 5 registros de ejemplo en la tabla teachers
+        // Crea registros de ejemplo en la tabla users
         DB::table('users')->insert([
             'name' => 'Pedro',
             'email' => 'Quevedo@email.com',

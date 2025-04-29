@@ -84,4 +84,16 @@ class ManagerController extends Controller
 
         return response()->json(['message' => 'Miembro del equipo directivo elimiando correctamente.']);
     }
+
+    public function setUser(Manager $manager) 
+    {
+        if (!User::where('email', $manager->email)->exists()) {
+            User::create([
+                'name' => $manager->name,
+                'email' => $manager->email,
+                'password' => bcrypt($manager->password),
+                'role' => 'manager'
+            ]);
+        }
+    }
 }

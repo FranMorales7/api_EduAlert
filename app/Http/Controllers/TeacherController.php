@@ -83,4 +83,16 @@ class TeacherController extends Controller
 
         return response()->json(['message' => 'Profesor elimiando correctamente.']);
     }
+
+    public function setUser(Teacher $teacher) 
+    {
+        if (!User::where('email', $teacher->email)->exists()) {
+            User::create([
+                'name' => $teacher->name,
+                'email' => $teacher->email,
+                'password' => bcrypt($teacher->password),
+                'role' => 'teacher'
+            ]);
+        }
+    }
 }

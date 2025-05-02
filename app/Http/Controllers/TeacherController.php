@@ -28,8 +28,6 @@ class TeacherController extends Controller
             'image' => 'nullable|string|max:255',
             'email' => 'required|email|unique:teachers',
             'password' => 'required|min:8',
-            'is_admin' => 'boolean',
-            'is_active' => 'boolean',
         ]);
 
         // Encriptar la contraseña
@@ -60,8 +58,6 @@ class TeacherController extends Controller
             'image' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:teachers,email,' . $teacher->id,
             'password' => 'sometimes|min:8',
-            'is_admin' => 'boolean',
-            'is_active' => 'boolean',
         ]);
 
         // Si se modifica la contraseña, ésta se encriptará
@@ -91,7 +87,8 @@ class TeacherController extends Controller
                 'name' => $teacher->name,
                 'email' => $teacher->email,
                 'password' => bcrypt($teacher->password),
-                'role' => 'teacher'
+                'is_admin' => false,
+                'is_active' => true,
             ]);
         }
     }

@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role', ['teacher', 'manager'])->nullable();
-            $table->rememberToken();
+            $table->boolean('is_admin')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->rememberToken('remember_token')->nullable();
             $table->timestamps();
         });
     }

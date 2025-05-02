@@ -22,9 +22,6 @@ class ManagersTableSeeder extends Seeder
             'image' => null,
             'email' => 'rosarioJBlanco@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a ...
-            // 'is_admin' => true, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -35,35 +32,6 @@ class ManagersTableSeeder extends Seeder
             'image' => null,
             'email' => 'gonzaloMegias@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a ...
-            // 'is_admin' => true, 
-            // 'is_active' => false,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('managers')->insert([
-            'name' => 'Dolores',
-            'last_name_1' => 'Cifuentes',
-            'last_name_2' => 'Rodríguez',
-            'image' => null,
-            'email' => 'doloresCifuentes@email.com',
-            'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a ...
-            // 'is_admin' => true, 
-            // 'is_active' => false,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('managers')->insert([
-            'name' => 'Juan Pablo',
-            'last_name_1' => 'Gómez',
-            'last_name_2' => 'Neva',
-            'image' => null,
-            'email' => 'juanGomez@email.com',
-            'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a ...
-            // 'is_admin' => true, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -74,9 +42,6 @@ class ManagersTableSeeder extends Seeder
             'image' => null,
             'email' => 'soniaReverte@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a ...
-            // 'is_admin' => true, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

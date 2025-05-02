@@ -61,8 +61,6 @@ class ManagerController extends Controller
             'image' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:managers,email,' . $manager->id,
             'password' => 'sometimes|min:8',
-            'is_admin' => 'boolean',
-            'is_active' => 'boolean',
         ]);
 
         // Si se modifica la contraseña, ésta se encriptará
@@ -92,7 +90,8 @@ class ManagerController extends Controller
                 'name' => $manager->name,
                 'email' => $manager->email,
                 'password' => bcrypt($manager->password),
-                'role' => 'manager'
+                'is_admin' => true,
+                'is_active' => true,
             ]);
         }
     }

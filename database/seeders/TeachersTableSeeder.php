@@ -22,9 +22,6 @@ class TeachersTableSeeder extends Seeder
             'image' => null,
             'email' => 'julioMSoria@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a false
-            // 'is_admin' => false, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -35,9 +32,6 @@ class TeachersTableSeeder extends Seeder
             'image' => null,
             'email' => 'olgaDelgado@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a false
-            // 'is_admin' => false, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -48,9 +42,6 @@ class TeachersTableSeeder extends Seeder
             'image' => null,
             'email' => 'samuCastillejo@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a false
-            // 'is_admin' => false, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -61,9 +52,6 @@ class TeachersTableSeeder extends Seeder
             'image' => null,
             'email' => 'isabelHerrera@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a false
-            // 'is_admin' => false, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -74,9 +62,6 @@ class TeachersTableSeeder extends Seeder
             'image' => null,
             'email' => 'Quevedo@email.com',
             'password' => bcrypt('12345678'), // Contraseña cifrada
-            // Por defecto están a false
-            // 'is_admin' => false, 
-            // 'is_active' => false,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

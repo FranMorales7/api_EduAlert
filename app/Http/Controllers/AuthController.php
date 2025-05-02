@@ -26,9 +26,6 @@ class AuthController extends Controller
             ]);
         }
 
-        // Aplicamos el rol del usuario
-        $this->setRole($user);
-
         // Generamos el token del usuario
         $token = $user->createToken('EduAlert')->plainTextToken;
 
@@ -38,25 +35,5 @@ class AuthController extends Controller
             'token' => $token,
             'user' => $user,
         ]);
-    }
-
-    private function setRole(User $user)
-    {
-        // Buscamos en Teacher
-        $teacher = Teacher::where('email', $user->email)->first();
-        
-        if ($teacher) {
-            $user->role = 'teacher';
-            return;
-        }
-
-        // Buscamos en Manager
-        $manager = Manager::where('email', $user->email)->first();
-        
-        if ($manager) {
-            $user->role = 'manager';
-            return;
-        }
-
     }
 }

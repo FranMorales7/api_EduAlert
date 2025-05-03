@@ -13,14 +13,23 @@ use App\Http\Controllers\AuthController;
 // Ruta de login (sin necesidad de autenticación)
 Route::post('login', [AuthController::class, 'login']);
 
-// Agrupar rutas que requieren autenticación
+// Grupo de rutas que requieren autenticación y no ser admin (TEACHER)
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('groups', GroupController::class);
+
+    // Incidentes
     Route::apiResource('incidents', IncidentController::class);
+    Route::get('/incidents/{incident}', [IncidentController::class, 'show']);
+    
+    Route::apiResource('groups', GroupController::class);
     Route::apiResource('lessons', LessonController::class);
-    Route::apiResource('managers', ManagerController::class);
-    Route::apiResource('students', StudentController::class);
     Route::apiResource('teachers', TeacherController::class);
     Route::apiResource('trips', TripController::class);
     Route::apiResource('tutors', TutorController::class);
 });
+
+// Grupo de rutas que requieren autenticación y ser admin (MANAGER)
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/admin/data', [ManagerController::class, 'index']);
+    Route::apiResource('/admin/students', StudentController::class);
+});
+

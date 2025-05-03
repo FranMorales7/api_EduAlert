@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Incident;
+use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class IncidentController extends Controller
@@ -12,7 +13,10 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        return response()->json(Incident::all());
+        // Generar las relaciones eloquent del modelo
+        $incidents = Incident::with(['student', 'teacher', 'lesson'])->get();
+
+        return response()->json($incidents);
     }
 
     /**
@@ -38,7 +42,25 @@ class IncidentController extends Controller
      */
     public function show(Incident $incident)
     {
-        return response()->json($incident);
+        try {
+            // Obtiene las relaciones
+            $lesson = $incident->lesson;
+            $student = $incident->student;
+            $teacher = $incident->teacher;
+
+            // Si alguna de las relaciones no existe, devolver 'null'
+            return response()->json([
+                'incident' => $incident,
+                'lesson' => $lesson ? $lesson : null,
+                'student' => $student ? $student : null,
+                'teacher' => $teacher ? $teacher : null,
+            ]);
+        } catch (\Exception $e) {
+            // Maneja cualquier error que pueda ocurrir durante el proceso
+            return response()->json([
+                'message' => 'Error al obtener el incidente: ' . $e->getMessage()
+            ], 500);  // Devuelve un error 500 si ocurre una excepción
+        }
     }
 
     /**
@@ -68,4 +90,5 @@ class IncidentController extends Controller
 
         return response()->json(['message' => 'Incidente en el aula eliminado correctamente.']);
     }
+
 }

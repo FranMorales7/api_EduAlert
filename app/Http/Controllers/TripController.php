@@ -12,7 +12,10 @@ class TripController extends Controller
      */
     public function index()
     {
-        return response()->json(Trip::all());
+        // Generar las relaciones eloquent del modelo
+        $trips = Trip::with(['student', 'teacher', 'lesson'])->get();
+
+        return response()->json($trips);
     }
 
     /**
@@ -38,7 +41,25 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-        return response()->json($trip);
+        try {
+            // Obtiene las relaciones
+            $lesson = $trip->lesson;
+            $student = $trip->student;
+            $teacher = $trip->teacher;
+
+            // Si alguna de las relaciones no existe, devolver 'null'
+            return response()->json([
+                'trip' => $trip,
+                'lesson' => $lesson ? $lesson : null,
+                'student' => $student ? $student : null,
+                'teacher' => $teacher ? $teacher : null,
+            ]);
+        } catch (\Exception $e) {
+            // Maneja cualquier error que pueda ocurrir durante el proceso
+            return response()->json([
+                'message' => 'Error al obtener el incidente: ' . $e->getMessage()
+            ], 500);  // Devuelve un error 500 si ocurre una excepción
+        }
     }
 
     /**

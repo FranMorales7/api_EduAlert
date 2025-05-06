@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Incident;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class IncidentController extends Controller
 {
@@ -89,6 +90,17 @@ class IncidentController extends Controller
         $incident->delete();
 
         return response()->json(['message' => 'Incidente en el aula eliminado correctamente.']);
+    }
+
+    /**
+     * Eliminar un incidente en clase.
+     */
+    public function filterByUser(User $user)
+    {
+        $userId = $user->id;
+
+        $response = Incident::where('teacher', $userId);
+        return response()->json(['Response' => $response], 200);
     }
 
 }

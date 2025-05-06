@@ -9,6 +9,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 // Ruta de login (sin necesidad de autenticación)
 Route::post('login', [AuthController::class, 'login']);
@@ -19,11 +20,21 @@ Route::middleware('auth:sanctum')->group(function () {
     // Incidentes
     Route::apiResource('incidents', IncidentController::class);
     Route::get('/incidents/{incident}', [IncidentController::class, 'show']);
-    
+    Route::get('/incidents/{user}', [IncidentController::class, 'filterByUser']);
+
+
+    // Salidas
+    Route::apiResource('trips', TripController::class);
+    Route::get('/trips/{trips}', [TripController::class, 'show']);
+
+    // Usuario
+    Route::apiResource('users', UserController::class);
+    Route::get('/users/{user.id}', [UserController::class, 'show']);
+
     Route::apiResource('groups', GroupController::class);
     Route::apiResource('lessons', LessonController::class);
     Route::apiResource('teachers', TeacherController::class);
-    Route::apiResource('trips', TripController::class);
+    
     Route::apiResource('tutors', TutorController::class);
 });
 

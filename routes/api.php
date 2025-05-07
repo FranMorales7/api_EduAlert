@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Incidentes
     Route::apiResource('incidents', IncidentController::class);
     Route::get('/incidents/{incident}', [IncidentController::class, 'show']);
-    Route::get('/incidents/{user}', [IncidentController::class, 'filterByUser']);
+    Route::get('/incidents/user/{user}', [IncidentController::class, 'filterByUser']);
 
 
     // Salidas

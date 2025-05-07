@@ -93,14 +93,15 @@ class IncidentController extends Controller
     }
 
     /**
-     * Eliminar un incidente en clase.
+     * Buscar un incidente en clase según el profesor.
      */
-    public function filterByUser(User $user)
+    public function filterByUser($user)
     {
-        $userId = $user->id;
+        $response = Incident::with(['student', 'lesson'])
+        ->where('teacher_id', $user)
+        ->get();
 
-        $response = Incident::where('teacher', $userId);
-        return response()->json(['Response' => $response], 200);
+        return response()->json($response);
     }
 
 }

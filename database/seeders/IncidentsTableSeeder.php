@@ -19,7 +19,7 @@ class IncidentsTableSeeder extends Seeder
             'description' => 'El estudiante ha lanzado un avión de papel a la mesa del profesor, por lo que ha sido reprendido y amonestado con un parte disciplinario.',
             'is_solved' => true,
             'student_id' => 2, 
-            'teacher_id' => 3,
+            'teacher_id' => 4,
             'lesson_id' => 2,
             'created_at' => '2025-04-14 12:05:48',
             'updated_at' => '2025-04-16 12:10:08',

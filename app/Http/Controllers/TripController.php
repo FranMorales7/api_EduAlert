@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trip;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
@@ -41,11 +42,12 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-        try {
+         try {
             // Obtiene las relaciones
             $lesson = $trip->lesson;
             $student = $trip->student;
-            $teacher = $trip->teacher;
+            $email = $trip->teacher->email;
+            $teacher = Teacher::where('email', $email)->first();
 
             // Si alguna de las relaciones no existe, devolver 'null'
             return response()->json([
@@ -57,7 +59,7 @@ class TripController extends Controller
         } catch (\Exception $e) {
             // Maneja cualquier error que pueda ocurrir durante el proceso
             return response()->json([
-                'message' => 'Error al obtener el incidente: ' . $e->getMessage()
+                'message' => 'Error al obtener la salida: ' . $e->getMessage()
             ], 500);  // Devuelve un error 500 si ocurre una excepción
         }
     }
@@ -88,5 +90,17 @@ class TripController extends Controller
         $trip->delete();
 
         return response()->json(['message' => 'Salida al aseo eliminada correctamente.']);
+    }
+
+    /**
+     * Buscar una salida en clase según el profesor.
+     */
+    public function filterByUser($user)
+    {
+        $response = Trip::with(['student', 'lesson'])
+        ->where('teacher_id', $user)
+        ->get();
+
+        return response()->json($response);
     }
 }

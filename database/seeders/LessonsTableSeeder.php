@@ -14,7 +14,7 @@ class LessonsTableSeeder extends Seeder
      */
     public function run()
     {
-        // Crear 3 registros de ejemplo en la tabla lessons
+        // Crear registros de ejemplo en la tabla lessons
         DB::table('lessons')->insert([
             'description' => 'Clase de Lengua castellana y literatura',
             'location' => 'Aula 199',

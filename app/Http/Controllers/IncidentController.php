@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Incident;
 use App\Models\Lesson;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -47,7 +48,8 @@ class IncidentController extends Controller
             // Obtiene las relaciones
             $lesson = $incident->lesson;
             $student = $incident->student;
-            $teacher = $incident->teacher;
+            $email = $incident->teacher->email;
+            $teacher = Teacher::where('email', $email)->first();
 
             // Si alguna de las relaciones no existe, devolver 'null'
             return response()->json([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -12,7 +13,10 @@ class UserController extends Controller
     // Obtener todos los usuarios
     public function index()
     {
-        return User::all();
+         // Generar las relaciones eloquent del modelo
+         $user = User::with(['teacher'])->get();
+
+         return response()->json($user);
     }
 
     // Crear un nuevo usuario
@@ -71,5 +75,12 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'Usuario eliminado']);
+    }
+
+    // Obtener la información completa de un profesor
+    public function getInfoTeacher($email) 
+    {
+        $teacher = Teacher::where('email', $email)->get();
+        return response()->json($teacher);
     }
 }

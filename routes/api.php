@@ -19,17 +19,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Incidentes
     Route::apiResource('incidents', IncidentController::class);
-    Route::get('/incidents/{incident}', [IncidentController::class, 'show']);
     Route::get('/incidents/user/{user}', [IncidentController::class, 'filterByUser']);
 
 
     // Salidas
     Route::apiResource('trips', TripController::class);
-    Route::get('/trips/{trips}', [TripController::class, 'show']);
+    Route::get('/trips/user/{user}', [TripController::class, 'filterByUser']);
 
     // Usuario
     Route::apiResource('users', UserController::class);
     Route::get('/users/{user.id}', [UserController::class, 'show']);
+    Route::get('/users/getInfoTeacher/$email', [UserController::class, 'getInfoTeacher']);
 
     Route::apiResource('groups', GroupController::class);
     Route::apiResource('lessons', LessonController::class);

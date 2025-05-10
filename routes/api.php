@@ -31,6 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{user.id}', [UserController::class, 'show']);
     Route::get('/users/getInfoTeacher/$email', [UserController::class, 'getInfoTeacher']);
 
+    // Estudiante
+    Route::apiResource('students', StudentController::class);
+
     Route::apiResource('groups', GroupController::class);
     Route::apiResource('lessons', LessonController::class);
     Route::apiResource('teachers', TeacherController::class);
@@ -41,6 +44,6 @@ Route::middleware('auth:sanctum')->group(function () {
 // Grupo de rutas que requieren autenticación y ser admin (MANAGER)
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/admin/data', [ManagerController::class, 'index']);
-    Route::apiResource('/admin/students', StudentController::class);
+    // Route::apiResource('/admin/students', StudentController::class);
 });
 

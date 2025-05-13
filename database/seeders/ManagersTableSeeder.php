@@ -14,7 +14,7 @@ class ManagersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Crea 5 registros de ejemplo en la tabla managementteams
+        // Crea 5 registros de ejemplo en la tabla managers
         DB::table('managers')->insert([
             'name' => 'Rosario',
             'last_name_1' => 'Jiménez',

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->nullable();
+            $table->string('description')->nullable()->default('Salida al baño');
             $table->boolean('is_solved')->default(false);
 
             // Si se elimina un estudiante, las salidas relacionadas se actualizan a NULL (no se eliminan)

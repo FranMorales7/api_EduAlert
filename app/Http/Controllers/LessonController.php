@@ -25,6 +25,7 @@ class LessonController extends Controller
             'location' => 'required|string|max:1000',
             'teacher_id' => 'nullable|exists:teachers,id',
             'group_id' => 'nullable|exists:groups,id',
+            'day' => 'nullable | int | max:2',
             'starts_at' => 'required|datetime',
             'ends_at' => 'required|datetime',
         ]);
@@ -52,6 +53,7 @@ class LessonController extends Controller
             'location' => 'sometimes|string|max:1000',
             'teacher_id' => 'sometimes|exists:teachers,id',
             'group_id' => 'sometimes|exists:groups,id',
+            'day' => 'sometimes | int | max:2',
             'starts_at' => 'sometimes|datetime',
             'ends_at' => 'sometimes|datetime',
         ]);

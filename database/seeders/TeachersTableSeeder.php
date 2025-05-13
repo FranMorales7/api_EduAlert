@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class TeachersTableSeeder extends Seeder
 {
@@ -14,37 +15,7 @@ class TeachersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Crea 5 registros de ejemplo en la tabla teachers
-        DB::table('teachers')->insert([
-            'name' => 'Julio',
-            'last_name_1' => 'Martínez',
-            'last_name_2' => 'Soria',
-            'image' => null,
-            'email' => 'julioMSoria@email.com',
-            'password' => bcrypt('12345678'), // Contraseña cifrada
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('teachers')->insert([
-            'name' => 'Olga',
-            'last_name_1' => 'García',
-            'last_name_2' => 'Delgado',
-            'image' => null,
-            'email' => 'olgaDelgado@email.com',
-            'password' => bcrypt('12345678'), // Contraseña cifrada
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        DB::table('teachers')->insert([
-            'name' => 'Samuel',
-            'last_name_1' => 'Castillejo',
-            'last_name_2' => 'Sánchez',
-            'image' => null,
-            'email' => 'samuCastillejo@email.com',
-            'password' => bcrypt('12345678'), // Contraseña cifrada
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // Crea 2 registros conlos que hacer pruebas en la tabla teachers
         DB::table('teachers')->insert([
             'name' => 'Isabel',
             'last_name_1' => 'Herrera',
@@ -65,5 +36,22 @@ class TeachersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // Crear una instancia de Faker para generar datos aleatorios
+        $faker = Faker::create();
+
+        // Crear 28 registros de ejemplo en la tabla teachers
+        for ($i = 0; $i < 28; $i++) {
+            DB::table('teachers')->insert([
+                'name' => $faker->firstName,
+                'last_name_1' => $faker->lastName,
+                'last_name_2' => $faker->optional()->lastName,
+                'image' => null,
+                'email' => $faker->unique()->safeEmail,
+                'password' => bcrypt('12345678'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

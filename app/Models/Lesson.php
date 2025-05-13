@@ -10,7 +10,7 @@ class Lesson extends Model
     use HasFactory;
 
     // Campos que se pueden asignar masivamente
-    protected $fillable = ['description', 'location', 'teacher_id', 'group_id', 'starts_at', 'ends_at'];
+    protected $fillable = ['description', 'location', 'teacher_id', 'group_id', 'day', 'starts_at', 'ends_at'];
 
     // Campos que no se mostrarán en los resultados
     protected $hidden = [];
@@ -23,6 +23,8 @@ class Lesson extends Model
     public function group(){
         return $this->belongsTo(Group::class, 'lesson_id');
     }
+
+
 
      //Convertir los datos pasados al tipo necesario
      protected $casts = ['starts_at' => 'datetime', 'ends_at' => 'datetime'];

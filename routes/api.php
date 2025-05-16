@@ -28,11 +28,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Usuario
     Route::apiResource('users', UserController::class);
-    Route::get('/users/{user.id}', [UserController::class, 'show']);
-    Route::get('/users/getInfoTeacher/$email', [UserController::class, 'getInfoTeacher']);
+    Route::get('/users/{userId}', [UserController::class, 'show']);
+    Route::get('/users/getInfoTeacher/{email}', [UserController::class, 'getInfoTeacher']);
 
     // Estudiante
     Route::apiResource('students', StudentController::class);
+
+    // Profesor
+    Route::get('/teachers/{userId}', [TeacherController::class, 'filterByUserId']);
+    Route::put('/teachers/edit/{userId}', [TeacherController::class, 'update']);
 
     Route::apiResource('groups', GroupController::class);
     Route::apiResource('lessons', LessonController::class);

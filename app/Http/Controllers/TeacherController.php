@@ -14,30 +14,13 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return response()->json(Teacher::all());
+        return Teacher::with('user')->get();
     }
 
     /**
-     * Crear un nuevo profesor.
+     * Crear un nuevo profesor desde User.
      */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'last_name_1' => 'required|string|max:255',
-            'last_name_2' => 'nullable|string|max:255',
-            'image' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:teachers',
-            'password' => 'required|min:8',
-        ]);
-
-        // Encriptar la contraseña
-        $validated['password'] = Hash::make($validated['password']);
-
-        $teacher = Teacher::create($validated);
-
-        return response()->json($teacher, 201);
-    }
+    // public function store(Request $request){}
 
     /**
      * Mostrar un profesor en específico.
@@ -58,7 +41,7 @@ class TeacherController extends Controller
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
 
-        $teacher = Teacher::where('email', $user->email)->first();
+        $teacher = Teacher::where('user_id', $userId)->first();
 
         if (!$teacher) {
             return response()->json(['error' => 'Profesor no encontrado'], 404);
@@ -93,19 +76,6 @@ class TeacherController extends Controller
         return response()->json(['message' => 'Profesor elimiando correctamente.']);
     }
 
-    public function setUser(Teacher $teacher) 
-    {
-        if (!User::where('email', $teacher->email)->exists()) {
-            User::create([
-                'name' => $teacher->name,
-                'email' => $teacher->email,
-                'password' => bcrypt($teacher->password),
-                'is_admin' => false,
-                'is_active' => true,
-            ]);
-        }
-    }
-
     /**
      * Mostrar un profesor en específico filtrando por id_usuario.
      */
@@ -117,7 +87,7 @@ class TeacherController extends Controller
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
 
-        $teacher = Teacher::where('email', $user->email)->first();
+        $teacher = Teacher::where('user_id', $userId)->first();
 
         if (!$teacher) {
             return response()->json(['error' => 'Profesor no encontrado'], 404);

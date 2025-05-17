@@ -11,6 +11,10 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory;
 
     protected $fillable = [
+        'name',
+        'last_name_1',
+        'last_name_2',
+        'image',
         'email',
         'password',
         'is_admin',
@@ -22,4 +26,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+        public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function manager()
+    {
+        return $this->hasOne(Manager::class);
+    }
+
 }

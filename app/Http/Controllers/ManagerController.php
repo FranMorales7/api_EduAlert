@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manager;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,32 +15,13 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        return response()->json(Manager::all());
+        return Manager::with('user')->get();
     }
 
     /**
-     * Crear un nuevo directivo.
+     * Crear un nuevo directivo desde User.
      */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'last_name_1' => 'required|string|max:255',
-            'last_name_2' => 'nullable|string|max:255',
-            'image' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:managers',
-            'password' => 'required|min:8',
-            'is_admin' => 'boolean',
-            'is_active' => 'boolean',
-        ]);
-
-        // Encriptar la contraseña
-        $validated['password'] = Hash::make($validated['password']);
-
-        $manager = Manager::create($validated);
-
-        return response()->json($manager, 201);
-    }
+    // public function store(Request $request){}
 
     /**
      * Mostrar un miembro del equipo directivo en específico.
@@ -52,8 +34,18 @@ class ManagerController extends Controller
     /**
      * Actualizar los datos de un miembro del equipo directivo.
      */
-    public function update(Request $request, Manager $manager)
+    public function update(Request $request, $userId)
     {
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
+        $manager = Manager::where('user_id', $userId)->first();
+        if (!$manager) {
+            return response()->json(['error' => 'Directivo no encontrado'], 404);
+        }
+        
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
             'last_name_1' => 'sometimes|string|max:255',
@@ -76,23 +68,31 @@ class ManagerController extends Controller
     /**
      * Eliminar un miembro del equipo directivo.
      */
-    public function destroy(string $id)
+    public function destroy(Manager $manager)
     {
         $manager->delete();
 
         return response()->json(['message' => 'Miembro del equipo directivo elimiando correctamente.']);
     }
 
-    public function setUser(Manager $manager) 
+    /**
+     * Mostrar un miembro del equipo directivo en específico filtrando por id_usuario.
+     */
+    public function filterByUserId($userId)
     {
-        if (!User::where('email', $manager->email)->exists()) {
-            User::create([
-                'name' => $manager->name,
-                'email' => $manager->email,
-                'password' => bcrypt($manager->password),
-                'is_admin' => true,
-                'is_active' => true,
-            ]);
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
+
+        $manager = Manager::where('user_id', $userId)->first();
+
+        if (!$manager) {
+            return response()->json(['error' => 'Directivo no encontrado'], 404);
+        }
+
+        return response()->json($manager);
     }
+
 }

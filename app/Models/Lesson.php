@@ -17,11 +17,11 @@ class Lesson extends Model
 
     // Indica relación Eloquent
     public function teacher(){
-        return $this->belongsTo(Teacher::class, 'lesson_id');
+        return $this->belongsTo(Teacher::class);
     }
 
     public function group(){
-        return $this->belongsTo(Group::class, 'lesson_id');
+        return $this->belongsTo(Group::class);
     }
 
 

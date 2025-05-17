@@ -11,6 +11,7 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Models\Lesson;
 
 // Ruta de login (sin necesidad de autenticación)
 Route::post('login', [AuthController::class, 'login']);
@@ -41,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Grupos y lecciones
     Route::apiResource('groups', GroupController::class);
     Route::apiResource('lessons', LessonController::class);
+    Route::get('/lessons/schedule/{teacherId}', [LessonController::class, 'getSchedule']);
 
     // Tutores
     Route::apiResource('tutors', TutorController::class);

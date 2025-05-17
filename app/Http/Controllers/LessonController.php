@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
+
 class LessonController extends Controller
 {
     /**
@@ -72,4 +73,33 @@ class LessonController extends Controller
 
         return response()->json(['message' => 'Clase eliminada correctamente.']);
     }
+
+    // Obtener el horario semanal de un profesor
+    public function getSchedule($teacherId)
+    {
+        // Obtener todas las lecciones del profesor con su grupo relacionado
+        $lessons = Lesson::where('teacher_id', $teacherId)
+            ->with('group') // relación group en el modelo Lesson
+            ->get();
+
+        // Validación por si no hay clases
+        if ($lessons->isEmpty()) {
+            return response()->json(['message' => 'El profesor no tiene clases asignadas.'], 404);
+        }
+
+        // Formatear la respuesta
+        $resp = $lessons->map(function ($lesson) {
+            return [
+                'day' => $lesson->day,
+                'starts_at' => $lesson->starts_at,
+                'ends_at' => $lesson->ends_at,
+                'subject' => $lesson->description,
+                'location' => $lesson->location,
+                'group' => optional($lesson->group)->name, // Previene error si no tiene grupo
+            ];
+        });
+
+        return response()->json($resp);
+    }
+
 }

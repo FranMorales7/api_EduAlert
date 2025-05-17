@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Profesor
     Route::get('/teachers/byUser/{userId}', [TeacherController::class, 'filterByUserId']);
-    Route::put('/teachers/byUser/{userId}', [TeacherController::class, 'update']); 
+    Route::post('/teachers/byUser/{userId}', [TeacherController::class, 'update']); 
 
     Route::apiResource('teachers', TeacherController::class);
 

@@ -72,6 +72,29 @@ class TeacherController extends Controller
             $validated['image'] = $path;
         }
 
+        // Actualizar campos sincronizados en User
+        if (isset($validated['name'])) {
+            $user->name = $validated['name'];
+        }
+
+        if (isset($validated['last_name_1'])) {
+            $user->last_name_1 = $validated['last_name_1'];
+        }
+
+        if (isset($validated['last_name_2'])) {
+            $user->last_name_2 = $validated['last_name_2'];
+        }
+
+        if (isset($validated['image'])) {
+            $user->image = $validated['image'];
+        }
+
+        if (isset($validated['email'])) {
+            $user->email = $validated['email'];
+        }
+
+        $user->save();
+
         $teacher->update($validated);
 
         return response()->json($teacher);

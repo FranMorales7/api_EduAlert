@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
@@ -51,7 +52,7 @@ class TeacherController extends Controller
             'name' => 'sometimes|string|max:255',
             'last_name_1' => 'sometimes|string|max:255',
             'last_name_2' => 'sometimes|string|max:255',
-            'image' => 'sometimes|string|max:255',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => 'sometimes|email|unique:teachers,email,' . $teacher->id,
             'password' => 'sometimes|min:8',
         ]);
@@ -59,6 +60,16 @@ class TeacherController extends Controller
         // Si se modifica la contraseña, ésta se encriptará
         if (isset($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
+        }
+
+        // Manejar imagen
+        if ($request->hasFile('image')) {
+            if ($teacher->image) {
+                Storage::disk('public')->delete($teacher->image);
+            }
+
+            $path = $request->file('image')->store('teachers', 'public');
+            $validated['image'] = $path;
         }
 
         $teacher->update($validated);

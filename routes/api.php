@@ -20,11 +20,15 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
 
     // Incidentes
-    Route::apiResource('incidents', IncidentController::class);
+    Route::post('/incidents', [IncidentController::class, 'store']);
+    Route::delete('/incidents/{incidents}', [IncidentController::class, 'destroy']);
+    Route::put('/incidents/{incidents}', [IncidentController::class, 'update']);
     Route::get('/incidents/user/{user}', [IncidentController::class, 'filterByUser']);
 
     // Salidas
-    Route::apiResource('trips', TripController::class);
+    Route::post('/trips', [TripController::class, 'store']);
+    Route::delete('/trips/{trip}', [TripController::class, 'destroy']);
+    Route::put('/trips/{trip}', [TripController::class, 'update']);
     Route::get('/trips/user/{user}', [TripController::class, 'filterByUser']);
 
     // Usuario
@@ -50,5 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Rutas que requieren autenticación y ser admin (MANAGER)
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/incidents', [IncidentController::class, 'index']);
+    Route::get('/trips', [TripController::class, 'index']);
     Route::get('/admin/data', [ManagerController::class, 'index']);
 });

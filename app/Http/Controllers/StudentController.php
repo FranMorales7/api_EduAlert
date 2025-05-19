@@ -12,7 +12,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return response()->json(Student::all());
+        // Generar las relaciones eloquent del modelo
+        $students = Student::with(['group'])->get();
+        return response()->json($students);
     }
 
     /**

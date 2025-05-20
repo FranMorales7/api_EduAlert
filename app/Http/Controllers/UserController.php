@@ -25,11 +25,12 @@ class UserController extends Controller
     // Crear un nuevo usuario
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('users', 'public');
-            $validated['image'] = $path;
-        }
-
+        // Primero valida
+        $request->merge([
+            'is_admin' => filter_var($request->input('is_admin'), FILTER_VALIDATE_BOOLEAN),
+            'is_active' => filter_var($request->input('is_active'), FILTER_VALIDATE_BOOLEAN),
+        ]);
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'last_name_1' => 'required|string|max:255',
@@ -40,6 +41,12 @@ class UserController extends Controller
             'is_admin' => 'boolean',
             'is_active' => 'boolean',
         ]);
+
+        // Luego maneja la imagen si viene
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('users', 'public');
+            $validated['image'] = $path;
+        }
 
         $user = DB::transaction(function () use ($validated) {
             $user = User::create([

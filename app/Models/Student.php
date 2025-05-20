@@ -10,7 +10,7 @@ class Student extends Model
     use HasFactory;
 
     // Campos que se pueden asignar masivamente
-    protected $fillable = ['name', 'last_name_1', 'last_name_2', 'birthdate', 'image', 'contact', 'group_id'];
+    protected $fillable = ['name', 'last_name_1', 'last_name_2', 'birthdate', 'contact', 'group_id'];
 
     // Campos que no se mostrarán en los resultados
     protected $hidden = [];

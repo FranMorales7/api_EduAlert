@@ -27,7 +27,6 @@ class StudentController extends Controller
             'last_name_1' => 'required|string|max:255',
             'last_name_2' => 'nullable|string|max:255',
             'birthdate' => 'required|date',
-            'image' => 'nullable|string|max:255',
             'contact' => 'nullable|string|max:255',
             'group_id' => 'nullable|exists:groups,id'
         ]);
@@ -55,7 +54,6 @@ class StudentController extends Controller
             'last_name_1' => 'sometimes|string|max:255',
             'last_name_2' => 'sometimes|string|max:255',
             'birthdate' => 'sometimes|date',
-            'image' => 'sometimes|string|max:255',
             'contact' => 'sometimes|string|max:255',
             'group_id' => 'sometimes|exists:groups,id'
         ]);

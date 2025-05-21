@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exits', function (Blueprint $table) {
+        Schema::create('trips', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->nullable();
+            $table->string('description')->nullable()->default('Salida al baño');
             $table->boolean('is_solved')->default(false);
 
             // Si se elimina un estudiante, las salidas relacionadas se actualizan a NULL (no se eliminan)
@@ -21,7 +21,7 @@ return new class extends Migration
             // Si se elimina un profesor, las salidas relacionadas se actualizan a NULL (no se eliminan)
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             // Si se elimina una clase, las salidas relacionadas se actualizan a NULL (no se eliminan)
-            $table->foreignId('class_id')->nullable()->constrained('classes')->onDelete('set null');
+            $table->foreignId('lesson_id')->nullable()->constrained('lessons')->onDelete('set null');
 
             $table->timestamps(); // created_at y updated_at
         });

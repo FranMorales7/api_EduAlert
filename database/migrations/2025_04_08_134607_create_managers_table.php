@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('managers', function (Blueprint $table) {
             $table->id();
 
-            // Clave foránea al usuario
+            // Relación uno a uno con users
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_admin')->default(true);
             $table->boolean('is_active')->default(true);
 
             $table->timestamps();
@@ -30,6 +30,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('managers');
     }
 };

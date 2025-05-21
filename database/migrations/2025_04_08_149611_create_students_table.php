@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name_1');
             $table->string('last_name_2')->nullable(); // opcional
             $table->date('birthdate');
-            $table->string('image')->nullable();
             $table->string('contact')->nullable();
             // grupo al que pertenece, puede ser nulo
             $table->foreignId('group_id')->nullable()->constrained('groups')->onDelete('set null');

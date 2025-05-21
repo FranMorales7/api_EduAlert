@@ -19,9 +19,9 @@ return new class extends Migration
             // si se elimina un estudiante, se eliminan aquellos incidentes relacionados
             $table->foreignId('student_id')->nullable()->constrained('students')->onDelete('cascade');
             // si se elimina un profesor, se eliminan aquellos incidentes relacionados
-            $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('cascade');
+            $table->foreignId('teacher_id')->nullable()->constrained('users')->onDelete('cascade');
             // si se elimina una clase, se eliminan aquellos incidentes relacionados
-            $table->foreignId('class_id')->nullable()->constrained('classes')->onDelete('cascade');
+            $table->foreignId('lesson_id')->nullable()->constrained('lessons')->onDelete('cascade');
             
             $table->timestamps(); // created at y updated at
         });

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('location');
-            $table->foreignId('tutor_id')->nullable()->constrained('tutors')->onDelete('set null'); // Tutor del grupo (puede ser null)
+            $table->foreignId('tutor_id')->nullable()->constrained('teachers')->onDelete('set null'); // Tutor del grupo (puede ser null)
             $table->timestamps();
         });
     }

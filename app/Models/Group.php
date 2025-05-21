@@ -17,6 +17,6 @@ class Group extends Model
 
     // Indica relación Eloquent
     public function tutor(){
-        return $this->belongsTo(Tutor::class);
+        return $this->belongsTo(Teacher::class);
     }
 }

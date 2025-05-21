@@ -8,7 +8,6 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TripController;
-use App\Http\Controllers\TutorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Models\Lesson;
@@ -43,18 +42,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('teachers', TeacherController::class);
 
-    // Grupos y lecciones
-    Route::apiResource('groups', GroupController::class);
-    Route::apiResource('lessons', LessonController::class);
+    // Lecciones
+    
     Route::get('/lessons/schedule/{teacherId}', [LessonController::class, 'getSchedule']);
-
-    // Tutores
-    Route::apiResource('tutors', TutorController::class);
+    Route::apiResource('lessons', LessonController::class);
+    
 });
 
 // Rutas que requieren autenticación y ser admin (MANAGER)
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/incidents', [IncidentController::class, 'index']);
     Route::get('/trips', [TripController::class, 'index']);
+    Route::apiResource('groups', GroupController::class);
     Route::get('/admin/data', [ManagerController::class, 'index']);
 });

@@ -45,7 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Lecciones
     
     Route::get('/lessons/schedule/{teacherId}', [LessonController::class, 'getSchedule']);
-    Route::apiResource('lessons', LessonController::class);
+    Route::get('/lessons', [LessonController::class, 'index']);
     
 });
 
@@ -55,4 +55,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/trips', [TripController::class, 'index']);
     Route::apiResource('groups', GroupController::class);
     Route::get('/admin/data', [ManagerController::class, 'index']);
+    Route::post('/lessons', [LessonController::class, 'store']);
+    Route::put('/lessons/{lesson}', [LessonController::class, 'update']);
+    Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy']);
+
 });

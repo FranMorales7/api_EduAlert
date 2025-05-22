@@ -66,4 +66,10 @@ class GroupController extends Controller
 
         return response()->json(['message' => 'Grupo eliminado correctamente.']);
     }
+
+    public function getAllNames() 
+    {
+        $groups = Group::select('name');
+        return response()->json($groups);
+    }
 }

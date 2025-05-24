@@ -15,8 +15,8 @@ class IncidentController extends Controller
      */
     public function index()
     {
-        // Generar las relaciones eloquent del modelo
-        $incidents = Incident::with(['student', 'teacher', 'lesson'])->get();
+        // Generar las relaciones eloquent del modelo e incluso la relacion interna de lesso con location
+        $incidents = Incident::with(['student', 'teacher', 'lesson.location'])->get();
 
         return response()->json($incidents);
     }

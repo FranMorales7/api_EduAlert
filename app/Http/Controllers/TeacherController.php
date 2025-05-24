@@ -97,6 +97,7 @@ class TeacherController extends Controller
 
         $teacher->update($validated);
 
+        $teacher->load('user'); // Carga la relación
         return response()->json($teacher);
     }
 
@@ -104,10 +105,13 @@ class TeacherController extends Controller
      * Eliminar un profesor.
      */
     public function destroy(Teacher $teacher)
-    {
+    {   
+        // Se elimina tanto de la tabla "teacher" como "user"
+        $user = User::where('id', $teacher->id)->first();
         $teacher->delete();
+        $user->delete();
 
-        return response()->json(['message' => 'Profesor elimiando correctamente.']);
+        return response()->json(['message' => 'Profesor eliminado correctamente.']);
     }
 
     /**

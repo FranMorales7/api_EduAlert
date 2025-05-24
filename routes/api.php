@@ -49,17 +49,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/lessons/schedule/{teacherId}', [LessonController::class, 'getSchedule']);
     Route::get('/lessons', [LessonController::class, 'index']);
 
-    Route::apiResource('groups', GroupController::class);
-
+    Route::get('/groups', [GroupController::class, 'index']);
     Route::middleware('auth:sanctum')->patch('/user/password', [UserController::class, 'updatePassword']);
 });
 
 // Rutas que requieren autenticación y ser admin (MANAGER)
-Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    
+    Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/incidents/solved', [IncidentController::class, 'deleteSolvedIncidents']);
     Route::get('/admin/data', [ManagerController::class, 'index']);
     Route::post('/lessons', [LessonController::class, 'store']);
     Route::put('/lessons/{lesson}', [LessonController::class, 'update']);
     Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy']);
-
+    Route::put('/groups/{group}', [GroupController::class, 'update']);
+    Route::post('/groups', [GroupController::class, 'store']);
+    Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
 });

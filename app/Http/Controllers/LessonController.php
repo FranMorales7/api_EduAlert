@@ -13,7 +13,8 @@ class LessonController extends Controller
      */
     public function index()
     {
-        return response()->json(Lesson::all());
+        $lessons = Lesson::with(['location', 'teacher', 'group'])->get();
+        return response()->json($lessons);
     }
 
     /**
@@ -23,7 +24,7 @@ class LessonController extends Controller
     {
         $validated = $request->validate([
             'description' => 'required|string|max:1000',
-            'location' => 'required|string|max:1000',
+            'location' => 'required|exists:class_rooms,id',
             'teacher_id' => 'nullable|exists:teachers,id',
             'group_id' => 'nullable|exists:groups,id',
             'day' => 'nullable | int | max:2',
@@ -51,7 +52,7 @@ class LessonController extends Controller
     {
         $validated = $request->validate([
             'description' => 'sometimes|string|max:1000',
-            'location' => 'sometimes|string|max:1000',
+            'location' => 'sometimes|exists:class_rooms,id',
             'teacher_id' => 'sometimes|exists:teachers,id',
             'group_id' => 'sometimes|exists:groups,id',
             'day' => 'sometimes | int | max:2',
@@ -94,7 +95,7 @@ class LessonController extends Controller
                 'starts_at' => $lesson->starts_at,
                 'ends_at' => $lesson->ends_at,
                 'subject' => $lesson->description,
-                'location' => $lesson->location,
+                'location' => optional($lesson->location)->name, // Previene error si no tiene ubicación
                 'group' => optional($lesson->group)->name, // Previene error si no tiene grupo
             ];
         });

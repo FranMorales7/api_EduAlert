@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->string('description')->nullable();
-            $table->string('location')->nullable();
+            // Si se borra un profesor, la clase se mantiene
+            $table->foreignId('location')->nullable()->constrained('class_rooms')->onDelete('set null');
             // Si se borra un profesor, la clase se mantiene
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             // Si se borra un grupo, la clase se eliminará también

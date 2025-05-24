@@ -13,7 +13,7 @@ class GroupController extends Controller
     public function index()
     {
         // Generar las relaciones eloquent del modelo
-        $groups = Group::with(['tutor'])->get();
+        $groups = Group::with(['location' ,'tutor'])->get();
         return response()->json($groups);
     }
 
@@ -24,7 +24,7 @@ class GroupController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:1000',
-            'location' => 'required|string|max:1000',
+            'location' => 'required|exists:class_rooms,id',
             'tutor_id' => 'nullable|exists:teachers,id'
         ]);
 
@@ -38,6 +38,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+        $group->load(['location', 'tutor']);
         return response()->json($group);
     }
 
@@ -48,7 +49,7 @@ class GroupController extends Controller
     {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:1000',
-            'location' => 'sometimes|string|max:1000',
+            'location' => 'sometimes|exists:class_rooms,id',
             'tutor_id' => 'sometimes|exists:teachers,id'
         ]);
 
@@ -65,11 +66,5 @@ class GroupController extends Controller
         $group->delete();
 
         return response()->json(['message' => 'Grupo eliminado correctamente.']);
-    }
-
-    public function getAllNames() 
-    {
-        $groups = Group::select('name');
-        return response()->json($groups);
     }
 }

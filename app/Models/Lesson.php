@@ -16,6 +16,10 @@ class Lesson extends Model
     protected $hidden = [];
 
     // Indica relación Eloquent
+    public function location(){
+        return $this->belongsTo(ClassRoom::class, 'location');
+    }
+
     public function teacher(){
         return $this->belongsTo(Teacher::class);
     }

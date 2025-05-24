@@ -16,7 +16,11 @@ class Group extends Model
     protected $hidden = [];
 
     // Indica relación Eloquent
+    public function location(){
+        return $this->belongsTo(ClassRoom::class, 'location');
+    }
+    
     public function tutor(){
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'tutor_id');
     }
 }

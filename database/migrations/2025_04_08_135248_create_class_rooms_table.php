@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('class_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('location')->nullable()->constrained('class_rooms')->onDelete('set null');
-            $table->foreignId('tutor_id')->nullable()->constrained('teachers')->onDelete('set null'); // Tutor del grupo (puede ser null)
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('class_rooms');
     }
 };

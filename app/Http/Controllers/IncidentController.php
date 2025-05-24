@@ -106,4 +106,15 @@ class IncidentController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * Eliminar aquellas incidencias que estén marcadas como "resueltas"
+     */
+    public function deleteSolvedIncidents()
+    {
+        $count = Incident::where('is_solved', true)->delete();
+
+        return response()->json([
+            'message' => "$count incidencias resueltas eliminadas"
+        ]);
+    }
 }

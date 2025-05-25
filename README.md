@@ -65,7 +65,7 @@ BACK-EDU/
 
 ## ⚙️ Instalación y configuración
  ### Clona el repositorio
- git clone https://github.com/tu-usuario/api_EduAlert.git
+ git clone https://github.com/FranMorales7/api_EduAlert.git
  cd api_EduAlert
 
  ### Instala dependencias

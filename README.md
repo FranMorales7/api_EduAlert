@@ -59,39 +59,40 @@ BACK-EDU/
 ├── .env.example                          # Archivo de ejemplo de entorno
 ├── composer.json                         # Dependencias PHP
 └── artisan                               # CLI de Laravel
+```
 
 ---
 
 ## ⚙️ Instalación y configuración
-# Clona el repositorio
-git clone https://github.com/tu-usuario/api_EduAlert.git
-cd api_EduAlert
+ ### Clona el repositorio
+ git clone https://github.com/tu-usuario/api_EduAlert.git
+ cd api_EduAlert
 
-# Instala dependencias
-composer install
+ ### Instala dependencias
+ composer install
 
-# Copia el archivo de entorno
-cp .env.example .env
+ ### Copia el archivo de entorno
+ cp .env.example .env
 
-# Genera la clave de aplicación
-php artisan key:generate
+ ### Genera la clave de aplicación
+ php artisan key:generate
 
-# Configura la base de datos en el archivo .env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=edu_alert
-DB_USERNAME=root
-DB_PASSWORD=
+ ### Configura la base de datos en el archivo .env
+ DB_CONNECTION=mysql
+ DB_HOST=127.0.0.1
+ DB_PORT=3306
+ DB_DATABASE=edu_alert
+ DB_USERNAME=root
+ DB_PASSWORD=
 
-# Ejecuta las migraciones
-php artisan migrate
+ ### Ejecuta las migraciones
+ php artisan migrate
 
-# (Opcional) Ejecuta los seeders
-php artisan db:seed
+ ### (Opcional) Ejecuta los seeders
+ php artisan db:seed
 
-# Inicia el servidor
-php artisan serve
+ ### Inicia el servidor
+ php artisan serve
 
 ---
 

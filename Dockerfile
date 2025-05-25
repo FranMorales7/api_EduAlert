@@ -1,5 +1,5 @@
 # Etapa base: PHP + Composer + dependencias necesarias
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
 
 # Instalar extensiones necesarias y Composer
 RUN apk add --no-cache \

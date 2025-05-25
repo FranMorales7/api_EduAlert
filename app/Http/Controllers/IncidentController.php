@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewNotificationCreated;
 use App\Models\Incident;
 use App\Models\Lesson;
 use App\Models\Teacher;
@@ -36,6 +37,16 @@ class IncidentController extends Controller
 
         $incident = Incident::create($validated);
 
+        /*
+        // Datos para la notificación
+        $notificationData = [
+            'title' => 'Nueva incidencia',
+            'message' => $incident->description,
+            'created_at' => now()->toDateString(),
+        ];
+
+        // Emitir el evento para notificación en tiempo real
+        event(new NewNotificationCreated('Hola mundo'));*/
         return response()->json($incident, 201);
     }
 
@@ -99,7 +110,7 @@ class IncidentController extends Controller
      */
     public function filterByUser($user)
     {
-        $response = Incident::with(['student', 'lesson'])
+        $response = Incident::with(['student', 'lesson.location'])
         ->where('teacher_id', $user)
         ->get();
 

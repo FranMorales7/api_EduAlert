@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧠 EduAlert Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este es el **backend** del sistema **EduAlert**, una plataforma desarrollada con Laravel 12 para la gestión de incidentes escolares, usuarios, clases y notificaciones en tiempo real. Este proyecto sirve como API REST para el frontend desarrollado en Next.js.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Tecnologías y dependencias
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Laravel 12](https://laravel.com/docs/12.x) — Framework PHP moderno y elegante
+- [Sanctum](https://laravel.com/docs/12.x/sanctum) — Autenticación basada en tokens
+- [Pusher](https://pusher.com/) + Laravel Echo — Comunicación en tiempo real vía Websockets
+- [PHP 8.2+](https://www.php.net/releases/8.2/en.php)
+- [Pail](https://github.com/laravel/pail) — Visualizador de logs en tiempo real
+- [Laravel Pint](https://laravel.com/docs/12.x/pint) — Formateador de código
+- [PHPUnit](https://phpunit.de/) — Testing automatizado
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📁 Estructura del proyecto
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+BACK-EDU/
+├── app/
+│   ├── Events/
+│   │   └── NewNotificationCreated.php     # Evento emitido al crear una notificación
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── AuthController.php
+│   │   │   ├── ClassRoomController.php
+│   │   │   ├── GroupController.php
+│   │   │   ├── IncidentController.php
+│   │   │   ├── LessonController.php
+│   │   │   ├── ManagerController.php
+│   │   │   ├── StudentController.php
+│   │   │   ├── TeacherController.php
+│   │   │   ├── TripController.php
+│   │   │   └── UserController.php
+│   │   └── Middleware/                   # Middleware personalizados o globales
+│   ├── Models/
+│   │   ├── ClassRoom.php
+│   │   ├── Group.php
+│   │   ├── Incident.php
+│   │   ├── Lesson.php
+│   │   ├── Manager.php
+│   │   ├── Student.php
+│   │   ├── Teacher.php
+│   │   ├── Trip.php
+│   │   └── User.php
+│   └── Providers/                        # Proveedores de servicios
+├── bootstrap/                            # Configuración de arranque del framework
+├── config/                               # Archivos de configuración
+├── database/                             # Migraciones, seeders y factories
+├── public/                               # Raíz pública del proyecto (index.php)
+├── resources/                            # Vistas, assets y lenguajes
+├── routes/
+│   └── api.php                           # Definición de rutas del backend (API REST)
+├── storage/                              # Logs, caché y archivos temporales
+├── tests/                                # Tests de la aplicación
+├── .env.example                          # Archivo de ejemplo de entorno
+├── composer.json                         # Dependencias PHP
+└── artisan                               # CLI de Laravel
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ Instalación y configuración
+# Clona el repositorio
+git clone https://github.com/tu-usuario/api_EduAlert.git
+cd api_EduAlert
 
-## Laravel Sponsors
+# Instala dependencias
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Copia el archivo de entorno
+cp .env.example .env
 
-### Premium Partners
+# Genera la clave de aplicación
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# Configura la base de datos en el archivo .env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=edu_alert
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Contributing
+# Ejecuta las migraciones
+php artisan migrate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# (Opcional) Ejecuta los seeders
+php artisan db:seed
 
-## Code of Conduct
+# Inicia el servidor
+php artisan serve
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🔐 Autenticación
+La autenticación se gestiona con Laravel Sanctum. Los usuarios obtienen un token tras iniciar sesión, que debe enviarse en el header Authorization: Bearer {token} para acceder a las rutas protegidas.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 👨‍💻 Autor
+Nombre: Francisco Morales
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Correo: lopezmoralesfrancisco18@gmail.com
+
+Repositorio Frontend: [Front-End/EduAlert](https://github.com/FranMorales7/front-EduAlert)
+

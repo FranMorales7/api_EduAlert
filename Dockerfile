@@ -1,55 +1,23 @@
-# Etapa 1: Construcción
-FROM composer:2 as vendor
+# Etapa base: PHP + Composer + dependencias necesarias
+FROM php:8.3-cli-alpine
 
+# Instalar extensiones necesarias y Composer
+RUN apk add --no-cache \
+    php8-pdo php8-pdo_mysql php8-mbstring php8-openssl php8-tokenizer php8-fileinfo php8-ctype php8-curl \
+    unzip curl git bash && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader
-
+# Copiar todo el proyecto
 COPY . .
 
-# Etapa 2: Producción
-FROM php:8.2-fpm-alpine
+# Instalar dependencias de Composer
+RUN composer install --no-dev --optimize-autoloader
 
-# Instala dependencias del sistema
-RUN apk add --no-cache \
-    php-mysqli \
-    php-pdo \
-    php-pdo_mysql \
-    php-mbstring \
-    php-tokenizer \
-    php-xml \
-    php-curl \
-    php-ctype \
-    php-fileinfo \
-    php-openssl \
-    php-bcmath \
-    php-json \
-    php-phar \
-    php-dom \
-    php-session \
-    php-simplexml \
-    php-xmlwriter \
-    php-zlib \
-    bash \
-    curl \
-    libzip-dev \
-    zip \
-    unzip \
-    mysql-client \
-    git \
-    supervisor
+# Preparar caché de configuración y rutas
+RUN php artisan config:cache && php artisan route:cache
 
-# Copia archivos desde la etapa anterior
-WORKDIR /var/www
-COPY --from=vendor /app /var/www
-
-# Ajusta permisos
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage
-
-# Expone el puerto del servidor PHP
-EXPOSE 9000
-
-# Comando de inicio
-CMD php artisan config:cache && php artisan migrate --force && php-fpm
+# Comando por defecto (puedes sobreescribirlo en Railway)
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

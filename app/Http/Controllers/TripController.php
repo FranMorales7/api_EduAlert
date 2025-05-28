@@ -35,7 +35,6 @@ class TripController extends Controller
 
         $trip = Trip::create($validated);
 
-        /*
         // Datos para la notificación
         $notificationData = [
             'title' => 'Nueva salida',
@@ -44,7 +43,7 @@ class TripController extends Controller
         ];
 
         // Emitir el evento para notificación en tiempo real
-        broadcast(new NewNotificationCreated($notificationData));*/
+        broadcast(new NewNotificationCreated($notificationData));
 
         return response()->json($trip, 201);
     }

@@ -24,7 +24,7 @@ class LessonController extends Controller
     {
         $validated = $request->validate([
             'description' => 'required|string|max:1000',
-            'location' => 'required|exists:class_rooms,id',
+            'location_id' => 'required|exists:class_rooms,id',
             'teacher_id' => 'nullable|exists:teachers,id',
             'group_id' => 'nullable|exists:groups,id',
             'day' => 'nullable | int | max:2',
@@ -52,7 +52,7 @@ class LessonController extends Controller
     {
         $validated = $request->validate([
             'description' => 'sometimes|string|max:1000',
-            'location' => 'sometimes|exists:class_rooms,id',
+            'location_id' => 'sometimes|exists:class_rooms,id',
             'teacher_id' => 'sometimes|exists:teachers,id',
             'group_id' => 'sometimes|exists:groups,id',
             'day' => 'sometimes | int | max:2',
@@ -80,7 +80,7 @@ class LessonController extends Controller
     {
         // Obtener todas las lecciones del profesor con su grupo relacionado
         $lessons = Lesson::where('teacher_id', $teacherId)
-            ->with('group') // relación group en el modelo Lesson
+            ->with('group', 'location') // relación group y location en el modelo Lesson
             ->get();
 
         // Validación por si no hay clases

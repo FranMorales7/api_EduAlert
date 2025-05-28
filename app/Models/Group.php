@@ -17,7 +17,7 @@ class Group extends Model
 
     // Indica relación Eloquent
     public function location(){
-        return $this->belongsTo(ClassRoom::class, 'location');
+        return $this->belongsTo(ClassRoom::class, 'location_id');
     }
     
     public function tutor(){

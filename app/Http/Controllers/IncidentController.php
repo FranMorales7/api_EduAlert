@@ -37,7 +37,6 @@ class IncidentController extends Controller
 
         $incident = Incident::create($validated);
 
-        /*
         // Datos para la notificación
         $notificationData = [
             'title' => 'Nueva incidencia',
@@ -46,7 +45,7 @@ class IncidentController extends Controller
         ];
 
         // Emitir el evento para notificación en tiempo real
-        event(new NewNotificationCreated('Hola mundo'));*/
+        event(new NewNotificationCreated($notificationData));
         return response()->json($incident, 201);
     }
 

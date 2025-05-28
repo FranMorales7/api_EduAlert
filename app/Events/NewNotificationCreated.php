@@ -37,4 +37,13 @@ class NewNotificationCreated implements ShouldBroadcast
     {
         return 'new-notification';
     }
+
+    /**
+     * Summary of broadcastWith
+     */
+    public function broadcastWith()
+    {
+        return $this->notification;
+    }
+
 }

@@ -1,23 +1,20 @@
-# Etapa base: PHP + Composer + dependencias necesarias
-FROM php:8.4-cli-alpine
+FROM php:8.2-cli
 
-# Instalar extensiones necesarias y Composer
-RUN apk add --no-cache \
-    php8-pdo php8-pdo_mysql php8-mbstring php8-openssl php8-tokenizer php8-fileinfo php8-ctype php8-curl \
-    unzip curl git bash && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt-get update && apt-get install -y \
+    unzip \
+    git \
+    curl \
+    zip \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libcurl4-openssl-dev \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath
 
-# Establecer el directorio de trabajo
-WORKDIR /app
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copiar todo el proyecto
+WORKDIR /var/www
 COPY . .
-
-# Instalar dependencias de Composer
-RUN composer install --no-dev --optimize-autoloader
-
-# Preparar caché de configuración y rutas
-RUN php artisan config:cache && php artisan route:cache
-
-# Comando por defecto (puedes sobreescribirlo en Railway)
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+RUN composer install

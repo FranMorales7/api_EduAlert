@@ -1,35 +1,55 @@
-FROM php:8.2-cli
+FROM php:8.2-fpm
 
-# Instala extensiones necesarias
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
-    unzip \
+    nginx \
     git \
     curl \
-    zip \
-    libzip-dev \
-    libpng-dev \
+    unzip \
     libonig-dev \
-    libxml2-dev \
-    libcurl4-openssl-dev \
-    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath
+    libzip-dev \
+    zip \
+    gnupg \
+    ca-certificates \
+    && docker-php-ext-install pdo_mysql mbstring zip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instala Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Instalar Node.js (v18 LTS, compatible con Vite 6)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g npm
 
-# Define el directorio de trabajo
-WORKDIR /var/www
+# Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia los archivos del proyecto
+# Configurar directorio de trabajo
+WORKDIR /var/www/html
+
+# Copiar archivos de la aplicación
 COPY . .
 
-# Instala dependencias sin ejecutar scripts de Laravel
-RUN composer install --no-scripts --no-dev --optimize-autoloader
+# Instalar dependencias PHP
+RUN composer install --optimize-autoloader --no-dev
 
-# Expón el puerto que usará Laravel
-EXPOSE 8000
+# Instalar dependencias Node.js
+RUN npm install
 
-# Comando por defecto (asegura que se ejecuta después de que las variables de entorno estén disponibles)
-CMD php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=8000
+# Compilar assets (Vite)
+RUN npm run build
+
+# Configurar permisos
+RUN mkdir -p storage/framework/{sessions,views,cache} \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
+
+# Configuración de Nginx
+COPY ./nginx.conf /etc/nginx/sites-available/default
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
+
+# Puerto expuesto
+EXPOSE 8080
+
+# Comando de inicio
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]

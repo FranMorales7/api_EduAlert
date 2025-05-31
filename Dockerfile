@@ -11,11 +11,12 @@ RUN apt-get update && apt-get install -y \
     zip \
     gnupg \
     ca-certificates \
+    supervisor \
     && docker-php-ext-install pdo_mysql mbstring zip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar Node.js (v18 LTS, compatible con Vite 6)
+# Instalar Node.js (v18 LTS)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm install -g npm
@@ -23,39 +24,31 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configurar directorio de trabajo
+# Directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar archivos de la aplicación
+# Copiar app
 COPY . .
 
-# Instalar dependencias PHP
+# Instalar dependencias PHP y JS
 RUN composer install --optimize-autoloader --no-dev --no-scripts
+RUN npm install && npm run build
 
-# Instalar dependencias Node.js
-RUN npm install
-
-# Compilar assets (Vite)
-RUN npm run build
-
-# Configurar permisos
+# Permisos
 RUN mkdir -p storage/framework/{sessions,views,cache} \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache
+ && chown -R www-data:www-data /var/www/html \
+ && chmod -R 775 storage bootstrap/cache
 
 # Configuración de Nginx
 COPY ./nginx.conf /etc/nginx/sites-available/default
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+ && ln -sf /dev/stderr /var/log/nginx/error.log
 
-# Puerto expuesto
-EXPOSE 8080
-
-# Instalar supervisord
-RUN apt-get update && apt-get install -y supervisor
-
-# Copiar archivo de configuración de supervisord
+# Supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Exponer puerto
+EXPOSE 8080
+
 # Comando de inicio
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

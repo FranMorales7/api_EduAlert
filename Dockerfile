@@ -51,5 +51,11 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 # Puerto expuesto
 EXPOSE 8080
 
+# Instalar supervisord
+RUN apt-get update && apt-get install -y supervisor
+
+# Copiar archivo de configuración de supervisord
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 # Comando de inicio
-CMD ["sh", "-c", "php-fpm -F & nginx -g 'daemon off;'"]
+CMD ["/usr/bin/supervisord"]

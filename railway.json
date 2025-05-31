@@ -7,7 +7,7 @@
   "deploy": {
     "runtime": "V2",
     "numReplicas": 1,
-    "preDeployCommand": "php artisan package:discover && php artisan config:cache && php artisan migrate --force && php artisan db:seed --force",
+    "preDeployCommand": "php artisan package:discover && php artisan config:cache && php artisan migrate --seed --force",
     "sleepApplication": false,
     "multiRegionConfig": {
       "europe-west4-drams3a": {

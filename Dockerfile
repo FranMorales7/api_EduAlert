@@ -52,4 +52,4 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 EXPOSE 8080
 
 # Comando de inicio
-CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "php-fpm -F & nginx -g 'daemon off;'"]

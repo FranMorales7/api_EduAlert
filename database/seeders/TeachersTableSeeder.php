@@ -12,7 +12,7 @@ class TeachersTableSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker::updateOrCreate();
+        $faker = Faker::create();
 
         // Profesores específicos
         $specificTeachers = [

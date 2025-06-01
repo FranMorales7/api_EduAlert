@@ -47,10 +47,12 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 # Supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+# Copiar y pegar el script de inicio
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
 # Exponer puerto
 EXPOSE 8080
 
 # Comando de inicio
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
 CMD ["/start.sh"]

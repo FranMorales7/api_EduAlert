@@ -35,7 +35,7 @@ class IncidentController extends Controller
             'lesson_id' => 'nullable|exists:lessons,id',
         ]);
 
-        $incident = Incident::create($validated);
+        $incident = Incident::updateOrCreate($validated);
 
         // Datos para la notificación
         $notificationData = [

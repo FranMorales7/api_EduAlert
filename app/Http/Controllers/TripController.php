@@ -33,7 +33,7 @@ class TripController extends Controller
             'lesson_id' => 'nullable|exists:lessons,id',
         ]);
 
-        $trip = Trip::create($validated);
+        $trip = Trip::updateOrCreate($validated);
 
         // Datos para la notificación
         $notificationData = [

@@ -32,7 +32,7 @@ class LessonController extends Controller
             'ends_at' => 'required|datetime',
         ]);
 
-        $lesson = Lesson::create($validated);
+        $lesson = Lesson::updateOrCreate($validated);
 
         return response()->json($lesson, 201);
     }

@@ -26,7 +26,7 @@ class ClassRoomController extends Controller
             'name' => 'required|string|max:1000',
         ]);
 
-        $classRoom = ClassRoom::create($validated);
+        $classRoom = ClassRoom::updateOrCreate($validated);
 
         return response()->json($classRoom, 201);
     }

@@ -19,7 +19,7 @@ class ManagersTableSeeder extends Seeder
         ];
 
         foreach ($managers as $data) {
-            $user = User::create([
+            $user = User::updateOrCreate([
                 'name' => $data['name'],
                 'last_name_1' => $data['last_name_1'],
                 'last_name_2' => $data['last_name_2'],
@@ -30,7 +30,7 @@ class ManagersTableSeeder extends Seeder
                 'is_active' => true,
             ]);
 
-            Manager::create([
+            Manager::updateOrCreate([
                 'user_id' => $user->id,
                 'name' => $data['name'],
                 'last_name_1' => $data['last_name_1'],

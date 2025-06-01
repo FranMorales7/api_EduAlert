@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::updateOrCreate('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->foreignId('location_id')->nullable()->constrained('class_rooms')->onDelete('set null');

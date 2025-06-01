@@ -28,7 +28,7 @@ class GroupController extends Controller
             'tutor_id' => 'nullable|exists:teachers,id'
         ]);
 
-        $group = Group::create($validated);
+        $group = Group::updateOrCreate($validated);
 
         return response()->json($group, 201);
     }

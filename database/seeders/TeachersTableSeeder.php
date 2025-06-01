@@ -12,7 +12,7 @@ class TeachersTableSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker::create();
+        $faker = Faker::updateOrCreate();
 
         // Profesores específicos
         $specificTeachers = [
@@ -21,7 +21,7 @@ class TeachersTableSeeder extends Seeder
         ];
 
         foreach ($specificTeachers as $data) {
-            $user = User::create([
+            $user = User::updateOrCreate([
                 'name' => $data['name'],
                 'last_name_1' => $data['last_name_1'],
                 'last_name_2' => $data['last_name_2'],
@@ -32,7 +32,7 @@ class TeachersTableSeeder extends Seeder
                 'is_active' => true,
             ]);
 
-            Teacher::create([
+            Teacher::updateOrCreate([
                 'user_id' => $user->id,
                 'name' => $data['name'],
                 'last_name_1' => $data['last_name_1'],
@@ -52,7 +52,7 @@ class TeachersTableSeeder extends Seeder
             $last_name_2 = $faker->optional()->lastName;
             $email = $faker->unique()->safeEmail;
 
-            $user = User::create([
+            $user = User::updateOrCreate([
                 'name' => $name,
                 'last_name_1' => $last_name_1,
                 'last_name_2' => $last_name_2,
@@ -63,7 +63,7 @@ class TeachersTableSeeder extends Seeder
                 'is_active' => true,
             ]);
 
-            Teacher::create([
+            Teacher::updateOrCreate([
                 'user_id' => $user->id,
                 'name' => $name,
                 'last_name_1' => $last_name_1,

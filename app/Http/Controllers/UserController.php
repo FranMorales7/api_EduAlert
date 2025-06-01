@@ -50,7 +50,7 @@ class UserController extends Controller
         }
 
         $user = DB::transaction(function () use ($validated) {
-            $user = User::create([
+            $user = User::updateOrCreate([
                 'name' => $validated['name'],
                 'last_name_1' => $validated['last_name_1'],
                 'last_name_2' => $validated['last_name_2'] ?? null,
@@ -75,8 +75,8 @@ class UserController extends Controller
             ];
 
             $user->is_admin
-                ? Manager::create($relatedData)
-                : Teacher::create($relatedData);
+                ? Manager::updateOrCreate($relatedData)
+                : Teacher::updateOrCreate($relatedData);
 
             return $user;
         });

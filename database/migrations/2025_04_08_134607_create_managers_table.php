@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('managers', function (Blueprint $table) {
+        Schema::updateOrCreate('managers', function (Blueprint $table) {
             $table->id();
 
             // Relación uno a uno con users

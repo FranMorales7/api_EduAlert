@@ -16,7 +16,7 @@ class StudentsTableSeeder extends Seeder
     public function run()
     {
         // Crear una instancia de Faker para generar datos aleatorios
-        $faker = Faker::create();
+        $faker = Faker::updateOrCreate();
 
         // Crear 25 registros de ejemplo en la tabla students
         for ($i = 0; $i < 25; $i++) {

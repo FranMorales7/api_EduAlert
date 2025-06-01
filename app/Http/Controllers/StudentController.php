@@ -31,7 +31,7 @@ class StudentController extends Controller
             'group_id' => 'nullable|exists:groups,id'
         ]);
 
-        $student = Student::create($validated);
+        $student = Student::updateOrCreate($validated);
 
         return response()->json($student, 201);
     }

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trips', function (Blueprint $table) {
+        Schema::updateOrCreate('trips', function (Blueprint $table) {
             $table->id();
             $table->string('description')->nullable()->default('Salida al baño');
             $table->boolean('is_solved')->default(false);

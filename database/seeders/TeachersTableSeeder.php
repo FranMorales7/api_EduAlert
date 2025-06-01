@@ -21,59 +21,67 @@ class TeachersTableSeeder extends Seeder
         ];
 
         foreach ($specificTeachers as $data) {
-            $user = User::updateOrCreate([
-                'name' => $data['name'],
-                'last_name_1' => $data['last_name_1'],
-                'last_name_2' => $data['last_name_2'],
-                'image' => null,
-                'email' => $data['email'],
-                'password' => Hash::make('12345678'),
-                'is_admin' => false,
-                'is_active' => true,
-            ]);
+            $user = User::updateOrCreate(
+                ['email' => $data['email']], // Clave única
+                [
+                    'name' => $data['name'],
+                    'last_name_1' => $data['last_name_1'],
+                    'last_name_2' => $data['last_name_2'],
+                    'image' => null,
+                    'password' => Hash::make('12345678'),
+                    'is_admin' => false,
+                    'is_active' => true,
+                ]
+            );
 
-            Teacher::updateOrCreate([
-                'user_id' => $user->id,
-                'name' => $data['name'],
-                'last_name_1' => $data['last_name_1'],
-                'last_name_2' => $data['last_name_2'],
-                'email' => $data['email'],
-                'password' => $user->password,
-                'image' => null,
-                'is_admin' => false,
-                'is_active' => true,
-            ]);
+            Teacher::updateOrCreate(
+                ['email' => $data['email']], // Clave única
+                [
+                    'user_id' => $user->id,
+                    'name' => $data['name'],
+                    'last_name_1' => $data['last_name_1'],
+                    'last_name_2' => $data['last_name_2'],
+                    'password' => $user->password,
+                    'image' => null,
+                    'is_admin' => false,
+                    'is_active' => true,
+                ]
+            );
         }
 
         // Profesores aleatorios
         for ($i = 0; $i < 28; $i++) {
             $name = $faker->firstName;
             $last_name_1 = $faker->lastName;
-            $last_name_2 = $faker->optional()->lastName;
+            $last_name_2 = $faker->lastName;
             $email = $faker->unique()->safeEmail;
 
-            $user = User::updateOrCreate([
-                'name' => $name,
-                'last_name_1' => $last_name_1,
-                'last_name_2' => $last_name_2,
-                'image' => null,
-                'email' => $email,
-                'password' => Hash::make('12345678'),
-                'is_admin' => false,
-                'is_active' => true,
-            ]);
+            $user = User::updateOrCreate(
+                ['email' => $email],
+                [
+                    'name' => $name,
+                    'last_name_1' => $last_name_1,
+                    'last_name_2' => $last_name_2,
+                    'image' => null,
+                    'password' => Hash::make('12345678'),
+                    'is_admin' => false,
+                    'is_active' => true,
+                ]
+            );
 
-            Teacher::updateOrCreate([
-                'user_id' => $user->id,
-                'name' => $name,
-                'last_name_1' => $last_name_1,
-                'last_name_2' => $last_name_2,
-                'email' => $email,
-                'password' => $user->password,
-                'image' => null,
-                'is_admin' => false,
-                'is_active' => true,
-            ]);
+            Teacher::updateOrCreate(
+                ['email' => $email],
+                [
+                    'user_id' => $user->id,
+                    'name' => $name,
+                    'last_name_1' => $last_name_1,
+                    'last_name_2' => $last_name_2,
+                    'password' => $user->password,
+                    'image' => null,
+                    'is_admin' => false,
+                    'is_active' => true,
+                ]
+            );
         }
     }
 }

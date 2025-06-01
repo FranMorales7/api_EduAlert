@@ -4,36 +4,26 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ClassRoomTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        // Crear registros de ejemplo en la tabla groups
-        DB::table('class_rooms')->insert([
-        ['name' => 'Aula 12', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 23', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 45', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 60', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 78', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 89', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 101', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 115', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 130', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 145', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 150', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 160', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 170', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 180', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 190', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 195', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 198', 'created_at' => now(), 'updated_at' => now()],
-        ['name' => 'Aula 200', 'created_at' => now(), 'updated_at' => now()],
-        ]);
+        $now = Carbon::now();
+
+        $classrooms = [
+            'Aula 12', 'Aula 23', 'Aula 45', 'Aula 60', 'Aula 78',
+            'Aula 89', 'Aula 101', 'Aula 115', 'Aula 130', 'Aula 145',
+            'Aula 150', 'Aula 160', 'Aula 170', 'Aula 180', 'Aula 190',
+            'Aula 195', 'Aula 198', 'Aula 200',
+        ];
+
+        foreach ($classrooms as $name) {
+            DB::table('class_rooms')->updateOrInsert(
+                ['name' => $name], // Clave de búsqueda
+                ['created_at' => $now, 'updated_at' => $now]
+            );
+        }
     }
 }

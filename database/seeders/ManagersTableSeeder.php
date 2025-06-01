@@ -19,28 +19,32 @@ class ManagersTableSeeder extends Seeder
         ];
 
         foreach ($managers as $data) {
-            $user = User::updateOrCreate([
-                'name' => $data['name'],
-                'last_name_1' => $data['last_name_1'],
-                'last_name_2' => $data['last_name_2'],
-                'image' => null,
-                'email' => $data['email'],
-                'password' => Hash::make('12345678'),
-                'is_admin' => true,
-                'is_active' => true,
-            ]);
+            $user = User::updateOrCreate(
+                ['email' => $data['email']], // Clave de búsqueda
+                [
+                    'name' => $data['name'],
+                    'last_name_1' => $data['last_name_1'],
+                    'last_name_2' => $data['last_name_2'],
+                    'image' => null,
+                    'password' => Hash::make('12345678'),
+                    'is_admin' => true,
+                    'is_active' => true,
+                ]
+            );
 
-            Manager::updateOrCreate([
-                'user_id' => $user->id,
-                'name' => $data['name'],
-                'last_name_1' => $data['last_name_1'],
-                'last_name_2' => $data['last_name_2'],
-                'email' => $data['email'],
-                'password' => $user->password,
-                'image' => null,
-                'is_admin' => true,
-                'is_active' => true,
-            ]);
+            Manager::updateOrCreate(
+                ['email' => $data['email']], // Clave de búsqueda
+                [
+                    'user_id' => $user->id,
+                    'name' => $data['name'],
+                    'last_name_1' => $data['last_name_1'],
+                    'last_name_2' => $data['last_name_2'],
+                    'password' => $user->password,
+                    'image' => null,
+                    'is_admin' => true,
+                    'is_active' => true,
+                ]
+            );
         }
     }
 }

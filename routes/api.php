@@ -15,7 +15,7 @@ use App\Models\ClassRoom;
 use App\Models\Lesson;
 
 // Ruta de login (sin necesidad de autenticación)
-Route::post('login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 // Rutas que requieren autenticación y no ser admin (TEACHER)
 Route::middleware('auth:sanctum')->group(function () {

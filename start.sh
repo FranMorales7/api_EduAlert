@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # Espera a MySQL (muy importante en Railway)
-until mysqladmin ping -h"$DB_HOST" --silent; do
+until mysql -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "SELECT 1;" > /dev/null 2>&1; do
   echo "⏳ Esperando a MySQL..."
   sleep 2
 done
+
 
 echo "✅ Base de datos disponible. Iniciando migraciones..."
 

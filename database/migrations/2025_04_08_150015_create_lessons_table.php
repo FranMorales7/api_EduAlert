@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('description')->nullable();
             // Si se borra un profesor, la clase se mantiene
-            $table->foreignId('class_room_id')->nullable()->constrained('class_rooms')->onDelete('set null');
+            $table->foreignId('location_id')->nullable()->constrained('class_rooms')->onDelete('set null');
             // Si se borra un profesor, la clase se mantiene
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             // Si se borra un grupo, la clase se eliminará también

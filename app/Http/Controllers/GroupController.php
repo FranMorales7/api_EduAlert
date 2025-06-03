@@ -13,7 +13,7 @@ class GroupController extends Controller
     public function index()
     {
         // Generar las relaciones eloquent del modelo
-        $groups = Group::with(['class_room_id' ,'tutor'])->get();
+        $groups = Group::with(['location_id' ,'tutor'])->get();
         return response()->json($groups);
     }
 
@@ -24,7 +24,7 @@ class GroupController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:1000',
-            'class_room_id' => 'required|exists:class_rooms,id',
+            'location_id' => 'required|exists:class_rooms,id',
             'tutor_id' => 'nullable|exists:teachers,id'
         ]);
 
@@ -38,7 +38,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $group->load(['class_room_id', 'tutor']);
+        $group->load(['location_id', 'tutor']);
         return response()->json($group);
     }
 
@@ -49,7 +49,7 @@ class GroupController extends Controller
     {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:1000',
-            'class_room_id' => 'sometimes|exists:class_rooms,id',
+            'location_id' => 'sometimes|exists:class_rooms,id',
             'tutor_id' => 'sometimes|exists:teachers,id'
         ]);
 

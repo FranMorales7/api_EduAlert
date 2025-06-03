@@ -24,7 +24,7 @@ class LessonController extends Controller
     {
         $validated = $request->validate([
             'description' => 'required|string|max:1000',
-            'class_room_id' => 'required|exists:class_rooms,id',
+            'location_id' => 'required|exists:class_rooms,id',
             'teacher_id' => 'nullable|exists:teachers,id',
             'group_id' => 'nullable|exists:groups,id',
             'day' => 'nullable | int | max:2',
@@ -52,7 +52,7 @@ class LessonController extends Controller
     {
         $validated = $request->validate([
             'description' => 'sometimes|string|max:1000',
-            'class_room_id' => 'sometimes|exists:class_rooms,id',
+            'location_id' => 'sometimes|exists:class_rooms,id',
             'teacher_id' => 'sometimes|exists:teachers,id',
             'group_id' => 'sometimes|exists:groups,id',
             'day' => 'sometimes | int | max:2',

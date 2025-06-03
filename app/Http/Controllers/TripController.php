@@ -33,7 +33,7 @@ class TripController extends Controller
             'lesson_id' => 'nullable|exists:lessons,id',
         ]);
 
-        $trip = Trip::updateOrCreate($validated);
+        $trip = Trip::create($validated);
 
         // Datos para la notificación
         $notificationData = [
@@ -43,7 +43,7 @@ class TripController extends Controller
         ];
 
         // Emitir el evento para notificación en tiempo real
-        broadcast(new NewNotificationCreated($notificationData));
+        event(new NewNotificationCreated($notificationData));
 
         return response()->json($trip, 201);
     }
@@ -114,5 +114,17 @@ class TripController extends Controller
         ->get();
 
         return response()->json($response);
+    }
+
+    /**
+     * Eliminar aquellas incidencias que estén marcadas como "resueltas"
+     */
+    public function deleteSolvedTrips()
+    {
+        $count = Trip::where('is_solved', true)->delete();
+
+        return response()->json([
+            'message' => "$count salidas resueltas eliminadas"
+        ]);
     }
 }

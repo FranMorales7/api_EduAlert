@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\NewNotificationCreated;
 use App\Models\Incident;
-use App\Models\Lesson;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class IncidentController extends Controller
 {
@@ -35,7 +33,7 @@ class IncidentController extends Controller
             'lesson_id' => 'nullable|exists:lessons,id',
         ]);
 
-        $incident = Incident::updateOrCreate($validated);
+        $incident = Incident::create($validated);
 
         // Datos para la notificación
         $notificationData = [

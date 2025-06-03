@@ -66,6 +66,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     
     // Incidentes
     Route::get('/incidents/solved', [IncidentController::class, 'deleteSolvedIncidents']);
+    Route::get('/trips/solved', [TripController::class, 'deleteSolvedTrips']);
     
     // Clases
     Route::post('/lessons', [LessonController::class, 'store']);

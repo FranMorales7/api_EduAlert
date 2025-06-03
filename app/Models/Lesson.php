@@ -10,14 +10,14 @@ class Lesson extends Model
     use HasFactory;
 
     // Campos que se pueden asignar masivamente
-    protected $fillable = ['description', 'location_id', 'teacher_id', 'group_id', 'day', 'starts_at', 'ends_at'];
+    protected $fillable = ['description', 'class_room_id', 'teacher_id', 'group_id', 'day', 'starts_at', 'ends_at'];
 
     // Campos que no se mostrarán en los resultados
     protected $hidden = [];
 
     // Indica relación Eloquent
     public function location(){
-        return $this->belongsTo(ClassRoom::class, 'location_id');
+        return $this->belongsTo(ClassRoom::class, 'class_room_id');
     }
 
     public function teacher(){

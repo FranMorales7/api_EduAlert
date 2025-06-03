@@ -10,14 +10,14 @@ class Group extends Model
     use HasFactory;
 
     // Campos que se pueden asignar masivamente
-    protected $fillable = ['name', 'location', 'tutor_id'];
+    protected $fillable = ['name', 'class_room_id', 'tutor_id'];
 
     // Campos que no se mostrarán en los resultados
     protected $hidden = [];
 
     // Indica relación Eloquent
     public function location(){
-        return $this->belongsTo(ClassRoom::class, 'location_id');
+        return $this->belongsTo(ClassRoom::class, 'class_room_id');
     }
     
     public function tutor(){

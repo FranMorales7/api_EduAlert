@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::delete('/lessons/{lesson}', [LessonController::class, 'destroy']);
 
     // Grupos
+    Route::get('/groups/{group}', [GroupController::class, 'show']);
     Route::put('/groups/{group}', [GroupController::class, 'update']);
     Route::post('/groups', [GroupController::class, 'store']);
     Route::delete('/groups/{group}', [GroupController::class, 'destroy']);

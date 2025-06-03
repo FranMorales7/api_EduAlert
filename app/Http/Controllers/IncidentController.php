@@ -17,7 +17,7 @@ class IncidentController extends Controller
     public function index()
     {
         // Generar las relaciones eloquent del modelo e incluso la relacion interna de lesso con location
-        $incidents = Incident::with(['student', 'teacher', 'lesson.location'])->get();
+        $incidents = Incident::with(['student', 'teacher', 'lesson.location'])->orderBy('created_at', 'desc')->get();
 
         return response()->json($incidents);
     }
@@ -111,6 +111,7 @@ class IncidentController extends Controller
     {
         $response = Incident::with(['student', 'lesson.location'])
         ->where('teacher_id', $user)
+        ->orderBy('created_at', 'desc')
         ->get();
 
         return response()->json($response);

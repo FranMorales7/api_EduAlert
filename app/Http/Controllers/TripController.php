@@ -15,7 +15,7 @@ class TripController extends Controller
     public function index()
     {
         // Generar las relaciones eloquent del modelo, incluso la relacion interna de lesson con location
-        $trips = Trip::with(['student', 'teacher', 'lesson.location'])->get();
+        $trips = Trip::with(['student', 'teacher', 'lesson.location'])->orderBy('created_at', 'desc')->get();
 
         return response()->json($trips);
     }
@@ -110,6 +110,7 @@ class TripController extends Controller
     {
         $response = Trip::with(['student', 'lesson.location'])
         ->where('teacher_id', $user)
+        ->orderBy('created_at', 'desc')
         ->get();
 
         return response()->json($response);

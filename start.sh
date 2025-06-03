@@ -14,8 +14,7 @@ php artisan config:clear
 php artisan cache:clear
 
 # Eliminar todas las tablas y sembrar datos
-php artisan migrate --force
-php artisan db:seed --class=GroupsTableSeeder --force
+php artisan migrate:fresh --seed --force
 
 # Iniciar supervisord (Nginx + PHP-FPM)
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

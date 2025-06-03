@@ -13,7 +13,7 @@ class GroupController extends Controller
     public function index()
     {
         // Generar las relaciones eloquent del modelo
-        $groups = Group::with(['location_id' ,'tutor'])->get();
+        $groups = Group::with(['location' ,'tutor'])->get();
         return response()->json($groups);
     }
 
@@ -38,7 +38,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $group->load(['location_id', 'tutor']);
+        $group->load(['location', 'tutor']);
         return response()->json($group);
     }
 

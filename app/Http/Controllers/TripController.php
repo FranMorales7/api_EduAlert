@@ -35,10 +35,15 @@ class TripController extends Controller
 
         $trip = Trip::create($validated);
 
+        // Cargar la lección y su ubicación si existe
+        $trip->load('lesson.location');
+
+        $locationName = $trip->lesson->location->name ?? 'Ubicación desconocida';
+
         // Datos para la notificación
         $notificationData = [
             'title' => 'Nueva salida',
-            'message' => $trip->description,
+            'message' => "{$trip->description} (en {$locationName})",
             'created_at' => now()->toDateString(),
         ];
 

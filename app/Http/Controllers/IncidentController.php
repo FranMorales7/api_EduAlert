@@ -35,10 +35,15 @@ class IncidentController extends Controller
 
         $incident = Incident::create($validated);
 
+        // Cargar la lección y su ubicación si existe
+        $incident->load('lesson.location');
+
+        $locationName = $incident->lesson->location->name ?? 'Ubicación desconocida';
+
         // Datos para la notificación
         $notificationData = [
             'title' => 'Nueva incidencia',
-            'message' => $incident->description,
+            'message' => "{$incident->description} (en {$locationName})",
             'created_at' => now()->toDateString(),
         ];
 

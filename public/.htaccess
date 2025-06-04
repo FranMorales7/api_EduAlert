@@ -5,6 +5,11 @@
 
     RewriteEngine On
 
+    # Serve storage files directly
+    RewriteCond %{REQUEST_URI} ^/storage/
+    RewriteCond %{DOCUMENT_ROOT}/storage/%{REQUEST_URI} -f
+    RewriteRule ^storage/(.*)$ storage/$1 [L,QSA]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

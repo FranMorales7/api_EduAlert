@@ -63,6 +63,8 @@ Route::middleware('auth:sanctum')->group(function () {
 // Rutas que requieren autenticación y ser admin (MANAGER)
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/admin/data', [ManagerController::class, 'index']);
+    Route::get('/manager/byUser/{userId}', [ManagerController::class, 'filterByUserId']);
+    Route::post('/manager/byUser/{userId}', [ManagerController::class, 'update']); 
     
     // Incidentes
     Route::get('/incidents/solved', [IncidentController::class, 'deleteSolvedIncidents']);

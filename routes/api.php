@@ -64,7 +64,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/admin/data', [ManagerController::class, 'index']);
     Route::get('/manager/byUser/{userId}', [ManagerController::class, 'filterByUserId']);
-    Route::put('/manager/byUser/{userId}', [ManagerController::class, 'update']); 
+    Route::post('/manager/byUser/{userId}', [ManagerController::class, 'update']); 
     
     // Incidentes
     Route::get('/incidents/solved', [IncidentController::class, 'deleteSolvedIncidents']);

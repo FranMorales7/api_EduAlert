@@ -141,8 +141,17 @@ class UserController extends Controller
                 $validated + ['user_id' => $user->id]
             );
         } else {
-            $model = $user->is_admin ? Manager::where('user_id', $user->id) : Teacher::where('user_id', $user->id);
-            $model->update($validated);
+            if ($user->is_admin) {
+                Manager::updateOrCreate(
+                    ['user_id' => $user->id],
+                    $validated + ['user_id' => $user->id]
+                );
+            } else {
+                Teacher::updateOrCreate(
+                    ['user_id' => $user->id],
+                    $validated + ['user_id' => $user->id]
+                );
+            }
         }
     });
 

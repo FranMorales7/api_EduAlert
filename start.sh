@@ -13,7 +13,7 @@ echo "✅ Base de datos disponible. Iniciando migraciones..."
 php artisan config:clear
 php artisan cache:clear
 
-# Eliminar todas las tablas y sembrar datos
+# Migrar todas las tablas y sembrar datos
 php artisan migrate --force
 
 # Iniciar supervisord (Nginx + PHP-FPM)
